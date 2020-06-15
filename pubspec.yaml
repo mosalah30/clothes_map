@@ -1,0 +1,65 @@
+name: clothes_map
+description: clothes shopping app
+publish_to: 'none'
+version: 0.6.0+pre-alpha
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  provider: ^4.0.4
+  get: ^2.10.3
+  carousel_pro: ^1.0.0
+  google_maps_flutter: ^0.5.25+3
+  geolocator: ^5.3.1
+  location_permissions: ^2.0.5
+  app_settings: ^3.0.1
+  google_sign_in: ^4.4.0
+  flutter_facebook_login: ^3.0.0
+  image_picker: ^0.6.4
+  fluttertoast: ^4.0.1
+  flutter_statusbarcolor: ^0.2.3
+  flutter_progress_button: ^1.0.0
+  modal_progress_hud: ^0.1.3
+  cached_network_image: ^2.2.0+1
+  flutter_spinkit: ^4.1.2+1
+  url_launcher: ^5.4.2
+  tree_view: ^0.0.5
+  admob_flutter: ^1.0.0-beta.4
+  http: ^0.12.0+4
+  sqflite: ^1.3.0
+  path_provider: ^1.6.7
+  auto_size_text: ^2.1.0
+  shared_preferences: ^0.5.7+3
+  awesome_dialog: ^1.1.0
+  flutter_cache_manager: ^1.2.2
+  firebase_core: ^0.4.5
+  firebase_auth: ^0.16.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/brands/
+    - assets/icons/
+    - assets/images/
+
+  fonts:
+  - family: Amiri
+    fonts:
+      - asset: assets/fonts/Amiri-BoldItalic.ttf
+
+  - family: Almarai
+    fonts:
+      - asset: assets/fonts/Almarai-Regular.ttf
+
+  - family: Cairo
+    fonts:
+      - asset: assets/fonts/Cairo-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/Cairo-Black.ttf
+        weight: 900

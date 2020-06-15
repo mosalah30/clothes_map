@@ -1,0 +1,10 @@
+1- payment
+2- add good readme with pictures included and features
+2- shop screen
+3- product detials
+5- products browser
+6- sections page //!
+7- customer products purchase history
+12- security full test
+13- upgrade all dependencies and perform full test
+14- shopping cart

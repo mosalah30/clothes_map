@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "420452988064",
+    "firebase_url": "https://clothes-map-279500.firebaseio.com",
+    "project_id": "clothes-map-279500",
+    "storage_bucket": "clothes-map-279500.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420452988064:android:a4bd55c2ffd8c9cc6505c5",
+        "android_client_info": {
+          "package_name": "com.heda7.clothes_map"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "420452988064-vbniu91slk5bitfql3o5vfopdcb51l6t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.heda7.clothes_map",
+            "certificate_hash": "9579d0aa03ef9e9fb734048c9d2ab98e9b1cea33"
+          }
+        },
+        {
+          "client_id": "420452988064-iev0ddojpsmrrej8nslsencq3qcl6lkt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1UpkTmvKuNroiBdglvQm_oKUYZ1WPNZo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "420452988064-iev0ddojpsmrrej8nslsencq3qcl6lkt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
