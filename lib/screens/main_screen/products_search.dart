@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:clothes_map/screens/main_screen/home.dart';
 import 'package:clothes_map/components/colors_loader.dart';
 import 'package:clothes_map/components/search_result_card.dart';
 import 'package:clothes_map/models/regular_product.dart';
@@ -9,6 +8,9 @@ import 'package:clothes_map/state_management/search_results_notifier.dart';
 import 'package:clothes_map/services/search_engine.dart';
 
 class ProductsSearch extends StatefulWidget {
+  final String keyword;
+  ProductsSearch(this.keyword);
+
   @override
   _ProductsSearchState createState() => _ProductsSearchState();
 }
@@ -21,16 +23,18 @@ class _ProductsSearchState extends State<ProductsSearch> {
   @override
   void initState() {
     super.initState();
-    searchEngine = SearchEngine();
+    searchResultsNotifier = Provider.of<SearchResultsNotifier>(
+      context,
+      listen: false,
+    );
+    searchEngine = SearchEngine(searchResultsNotifier);
     scrollController = ScrollController();
-    searchResultsNotifier =
-        Provider.of<SearchResultsNotifier>(context, listen: false);
-    searchEngine.search(HomeScreen.searchController.text);
+    searchEngine.search(widget.keyword);
     scrollController.addListener(() async {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
         searchResultsNotifier.nextSearchResultPage++;
-        await searchEngine.search(HomeScreen.searchController.text);
+        await searchEngine.search(widget.keyword);
       }
     });
   }
@@ -69,38 +73,35 @@ class _ProductsSearchState extends State<ProductsSearch> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ChangeNotifierProvider(
-        create: (context) => SearchResultsNotifier(),
-        child: Consumer<SearchResultsNotifier>(
-          builder: (context, admin, child) {
-            if (admin.isLoading) {
-              return ColorsLoader();
+      child: Consumer<SearchResultsNotifier>(
+        builder: (context, admin, child) {
+          if (admin.isLoading) {
+            return ColorsLoader();
+          } else {
+            if (admin.searchResults.isNotEmpty) {
+              return generateResultsList(admin.searchResults);
             } else {
-              if (admin.searchResults.isNotEmpty) {
-                return generateResultsList(admin.searchResults);
-              } else {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Image.asset(
-                      'assets/icons/no_results.png',
-                      height: 100,
-                      width: 100,
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Image.asset(
+                    'assets/icons/no_results.png',
+                    height: 100,
+                    width: 100,
+                  ),
+                  Text(
+                    'لا توجد نتائج',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'Cairo',
+                      fontWeight: FontWeight.w700,
                     ),
-                    Text(
-                      'لا توجد نتائج',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: 'Cairo',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
-                );
-              }
+                  ),
+                ],
+              );
             }
-          },
-        ),
+          }
+        },
       ),
     );
   }

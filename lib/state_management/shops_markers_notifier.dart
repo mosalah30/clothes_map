@@ -15,14 +15,7 @@ class ShopsMarkersNotifier extends ChangeNotifier {
   final completer = Completer<GoogleMapController>();
   Set<Marker> markers = Set<Marker>();
 
-  List<bool> categorySelectionStates = [false, false, false, true];
   bool loading = false;
-
-  void selectSection(int sectionIndex) {
-    categorySelectionStates = [false, false, false, false];
-    categorySelectionStates[sectionIndex] = true;
-    notifyListeners();
-  }
 
   void changeLoaderState(bool newBool) {
     loading = newBool;
@@ -81,28 +74,7 @@ class ShopsMarkersNotifier extends ChangeNotifier {
           }
         }
       }
-    } catch (e) {
-      print(e);
-    }
-    notifyListeners();
-  }
-
-  Future<void> filterShopMarkers(
-    String category,
-    LatLngBounds areaBounds,
-  ) async {
-    await resetFilter(areaBounds);
-    Set<Marker> markersToBeRemoved = Set<Marker>();
-    for (var marker in markers)
-      if (!marker.markerId.value.contains(category)) {
-        markersToBeRemoved.add(marker);
-      }
-    markers.removeAll(markersToBeRemoved);
-    notifyListeners();
-  }
-
-  Future<void> resetFilter(LatLngBounds areaBounds) async {
-    await getMarkersOfCurrentArea(areaBounds);
+    } catch (e) {}
     notifyListeners();
   }
 }

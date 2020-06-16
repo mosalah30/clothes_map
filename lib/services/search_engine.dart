@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import 'package:clothes_map/state_management/search_results_notifier.dart';
 import 'package:clothes_map/utils/values.dart';
 
 class SearchEngine {
-  final searchResultsNotifier = SearchResultsNotifier();
+  final searchResultsNotifier;
+  SearchEngine(this.searchResultsNotifier);
 
   Future<void> search(String keyword) async {
     try {
@@ -18,6 +18,7 @@ class SearchEngine {
         },
       );
       List<dynamic> results = json.decode(response.body);
+
       if (results.isNotEmpty) {
         searchResultsNotifier.changeSearchResultsState(results);
       } else {

@@ -1,4 +1,3 @@
-import 'package:clothes_map/state_management/shops_markers_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:admob_flutter/admob_flutter.dart';
@@ -6,6 +5,8 @@ import 'package:admob_flutter/admob_flutter.dart';
 import 'package:clothes_map/screens/splash_screen.dart';
 import 'package:clothes_map/state_management/account_recovery_notifier.dart';
 import 'package:clothes_map/state_management/user_info.dart';
+import 'package:clothes_map/state_management/search_results_notifier.dart';
+import 'package:clothes_map/state_management/shops_markers_notifier.dart';
 import 'package:clothes_map/utils/styles.dart';
 
 void main() {
@@ -22,6 +23,7 @@ class ClothesMap extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => UserInfo()),
         ChangeNotifierProvider(create: (context) => AccountRecoveryNotifier()),
         ChangeNotifierProvider(create: (context) => ShopsMarkersNotifier()),
+        ChangeNotifierProvider(create: (context) => SearchResultsNotifier()),
       ],
       child: MaterialApp(
         title: 'Clothes Map',

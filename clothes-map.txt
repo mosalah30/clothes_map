@@ -1,10 +1,9 @@
-1- payment
-2- add good readme with pictures included and features
-2- shop screen
-3- product detials
-5- products browser
-6- sections page //!
-7- customer products purchase history
-12- security full test
-13- upgrade all dependencies and perform full test
-14- shopping cart
+1- sections page
+2- products browser
+3- shop screen
+4- product detials
+5- shopping cart
+6- customer products purchase history
+7- add payment
+8- upgrade all dependencies and perform full test
+9- add good readme with pictures and features details

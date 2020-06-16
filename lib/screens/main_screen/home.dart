@@ -8,24 +8,21 @@ import 'package:clothes_map/components/offer_card.dart';
 import 'package:clothes_map/screens/main_screen/products_search.dart';
 import 'package:clothes_map/state_management/screens_controller.dart';
 import 'package:clothes_map/state_management/offers_notifier.dart';
-import 'package:clothes_map/services/search_engine.dart';
 import 'package:clothes_map/services/offers_client.dart';
 import 'package:clothes_map/utils/status_bar_color.dart';
 import 'package:clothes_map/utils/styles.dart';
 
 class HomeScreen extends StatefulWidget {
-  static final searchController = TextEditingController();
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  TextEditingController searchController;
   OffersClient offersClient;
   OffersNotifier offersNotifier;
   ScreensController screensController;
   ScrollController scrollController;
-  SearchEngine searchEngine;
 
   @override
   void initState() {
@@ -33,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     offersNotifier = Provider.of<OffersNotifier>(context, listen: false);
     screensController = Provider.of<ScreensController>(context, listen: false);
     scrollController = ScrollController();
-    searchEngine = SearchEngine();
+    searchController = TextEditingController();
     offersClient = OffersClient(offersNotifier);
     changeStatusBarColor(appPrimaryColor, false);
     offersClient.getOffers('hot_offers');
@@ -76,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   hintText: 'بحث',
                                   border: InputBorder.none,
                                 ),
-                                controller: HomeScreen.searchController,
+                                controller: searchController,
                               ),
                             ),
                           ),
@@ -85,10 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               searchingState ? Icons.cancel : Icons.search,
                             ),
                             onPressed: () {
-                              if (HomeScreen.searchController.text
-                                          .trim()
-                                          .length <
-                                      3 &&
+                              if (searchController.text.trim().length < 3 &&
                                   !searchingState) {
                                 Fluttertoast.showToast(
                                   msg: 'كلمة البحث أقل من 3 أحرف',
@@ -120,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           searchingState
-              ? ProductsSearch()
+              ? ProductsSearch(searchController.text)
               : Expanded(
                   child: Container(
                     child: SingleChildScrollView(
@@ -202,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     super.dispose();
     offersNotifier.reset();
-    HomeScreen.searchController.clear();
+    searchController.clear();
     scrollController.dispose();
     changeStatusBarColor(Colors.black, true);
   }

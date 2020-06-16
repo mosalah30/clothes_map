@@ -29,6 +29,5 @@ class SearchResultsNotifier extends ChangeNotifier {
     isLoading = true;
     hasMore = null;
     searchResults = List<RegularProduct>();
-    notifyListeners();
   }
 }
