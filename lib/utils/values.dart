@@ -34,6 +34,9 @@ const accountsDuplicateValidatorAPI =
 
 const offersAPI = "$appDomain/backend/scripts/products/get_offers.php";
 
+const regularProductsAPI =
+    "$appDomain/backend/scripts/products/get_regular_products.php";
+
 const productsSearchAPI = "$appDomain/backend/scripts/products/search.php";
 
 const accountRecoveryAPI =
@@ -48,21 +51,25 @@ const clothesBrands = {
   3: "Active",
   4: "Zara",
 };
-const clothesSectionItems = [
-  "بناطيل وقمصان",
-  "بدل رجالي وجينز",
-  "ملابس النوم وشربات",
-  "ملابس داخلية"
-];
-const shoesSectionItems = [
-  "صنادل وشباشب",
-  "أحذية رياضية",
-];
-const accessoriesSectionItems = [
-  "ساعات رجالي",
-  "ساعات حريمي",
-  "نظارات",
-  "أحزمة وكرفتات"
+
+const sections = [
+  [
+    "صيفي رجالي",
+    "شتوي رجالي",
+    "أحذية رجالي",
+    "شنط رجالي",
+    "إكسسوارات رجالي",
+    "رياضي رجالي"
+  ],
+  [
+    "صيفي حريمي",
+    "شتوي حريمي",
+    "أحذية حريمي",
+    "شنط حريمي",
+    "إكسسوارات حريمي",
+    "رياضي حريمي"
+  ],
+  ["أولاد", "بنات"],
 ];
 
 final defaultLocation = LatLng(30.048, 31.1997);

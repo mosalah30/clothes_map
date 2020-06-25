@@ -10,7 +10,6 @@ import 'package:clothes_map/screens/main_screen/home.dart';
 import 'package:clothes_map/screens/main_screen/sections.dart';
 import 'package:clothes_map/state_management/screens_controller.dart';
 import 'package:clothes_map/state_management/user_info.dart';
-import 'package:clothes_map/state_management/offers_notifier.dart';
 import 'package:clothes_map/services/location.dart';
 import 'package:clothes_map/utils/screen_util.dart';
 import 'package:clothes_map/utils/values.dart';
@@ -31,7 +30,7 @@ class _MainWidgetState extends State<MainWidget> {
         centerTitle: true,
         title: Hero(
           child: Image.asset(
-            'assets/images/splash_logo.png',
+            'assets/splash_logo.png',
             height: deviceHeight * 0.07,
           ),
           tag: 'splash_logo',
@@ -42,17 +41,19 @@ class _MainWidgetState extends State<MainWidget> {
         preferredSize: Size(double.maxFinite, deviceHeight * 0.1),
         child: DefaultTabController(
           length: 3,
-          initialIndex: 1,
+          initialIndex: 0,
           child: TabBar(
             labelPadding: EdgeInsets.symmetric(vertical: 20),
             tabs: <Widget>[
-              Text('النساء'),
               Text('الرجال'),
+              Text('النساء'),
               Text('الأطفال'),
             ],
             onTap: (int i) {
-              Provider.of<ScreensController>(context, listen: false)
-                  .changeSectionIndex(i);
+              Provider.of<ScreensController>(
+                context,
+                listen: false,
+              ).changeSectionIndex(i);
             },
           ),
         ),
@@ -133,97 +134,91 @@ class _MainWidgetState extends State<MainWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ScreensController(),
-      child: Selector<ScreensController, int>(
-        selector: (context, screensController) => screensController.screenIndex,
-        builder: (context, screenIndexState, child) {
-          return SafeArea(
-            child: Directionality(
-              textDirection: TextDirection.rtl,
-              child: Consumer<UserInfo>(
-                builder: (context, userInfo, child) => Scaffold(
-                  backgroundColor: Colors.white,
-                  resizeToAvoidBottomPadding: false,
-                  appBar: buildAppBar(screenIndexState),
-                  body: ChangeNotifierProvider(
-                    create: (context) => OffersNotifier(),
-                    child: buildCurrentScreen(screenIndexState),
-                  ),
-                  bottomNavigationBar: BottomNavigationBar(
-                    type: BottomNavigationBarType.fixed,
-                    items: [
-                      BottomNavigationBarItem(
-                        title: Text(
-                          'الرئيسية',
-                          style: TextStyle(fontSize: 13),
-                        ),
-                        icon: Image.asset(
-                          'assets/icons/home.png',
-                          height: 25,
-                          width: 25,
-                        ),
+    return Selector<ScreensController, int>(
+      selector: (context, screensController) => screensController.screenIndex,
+      builder: (context, screenIndexState, child) {
+        return SafeArea(
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: Consumer<UserInfo>(
+              builder: (context, userInfo, child) => Scaffold(
+                backgroundColor: Colors.white,
+                resizeToAvoidBottomPadding: false,
+                appBar: buildAppBar(screenIndexState),
+                body: buildCurrentScreen(screenIndexState),
+                bottomNavigationBar: BottomNavigationBar(
+                  type: BottomNavigationBarType.fixed,
+                  items: [
+                    BottomNavigationBarItem(
+                      title: Text(
+                        'الرئيسية',
+                        style: TextStyle(fontSize: 13),
                       ),
-                      BottomNavigationBarItem(
-                        title: Text(
-                          'الخريطة',
-                          style: TextStyle(fontSize: 13),
-                        ),
-                        icon: Image.asset(
-                          'assets/icons/shopping_map.png',
-                          height: 25,
-                          width: 25,
-                        ),
+                      icon: Image.asset(
+                        'assets/icons/home.png',
+                        height: 25,
+                        width: 25,
                       ),
-                      BottomNavigationBarItem(
-                        title: Text(
-                          'الأقسام',
-                          style: TextStyle(fontSize: 13),
-                        ),
-                        icon: Image.asset(
-                          'assets/icons/menu.png',
-                          height: 25,
-                          width: 25,
-                        ),
+                    ),
+                    BottomNavigationBarItem(
+                      title: Text(
+                        'الخريطة',
+                        style: TextStyle(fontSize: 13),
                       ),
-                      BottomNavigationBarItem(
-                        title: Text(
-                          'العروض',
-                          style: TextStyle(fontSize: 13),
-                        ),
-                        icon: Image.asset(
-                          'assets/icons/offers.png',
-                          width: 25,
-                          height: 25,
-                        ),
+                      icon: Image.asset(
+                        'assets/icons/shopping_map.png',
+                        height: 25,
+                        width: 25,
                       ),
-                      BottomNavigationBarItem(
-                        title: Text(
-                          'الحساب',
-                          style: TextStyle(fontSize: 13),
-                        ),
-                        icon: Image.asset(
-                          'assets/icons/account.png',
-                          height: 25,
-                          width: 25,
-                        ),
+                    ),
+                    BottomNavigationBarItem(
+                      title: Text(
+                        'الأقسام',
+                        style: TextStyle(fontSize: 13),
                       ),
-                    ],
-                    selectedItemColor: Colors.blue,
-                    unselectedFontSize: screenUtil.setSp(18),
-                    selectedFontSize: screenUtil.setSp(20),
-                    currentIndex: screenIndexState,
-                    onTap: (int i) {
-                      Provider.of<ScreensController>(context, listen: false)
-                          .changeScreenIndex(i);
-                    },
-                  ),
+                      icon: Image.asset(
+                        'assets/icons/menu.png',
+                        height: 25,
+                        width: 25,
+                      ),
+                    ),
+                    BottomNavigationBarItem(
+                      title: Text(
+                        'العروض',
+                        style: TextStyle(fontSize: 13),
+                      ),
+                      icon: Image.asset(
+                        'assets/icons/offers.png',
+                        width: 25,
+                        height: 25,
+                      ),
+                    ),
+                    BottomNavigationBarItem(
+                      title: Text(
+                        'الحساب',
+                        style: TextStyle(fontSize: 13),
+                      ),
+                      icon: Image.asset(
+                        'assets/icons/account.png',
+                        height: 25,
+                        width: 25,
+                      ),
+                    ),
+                  ],
+                  selectedItemColor: Colors.blue,
+                  unselectedFontSize: screenUtil.setSp(18),
+                  selectedFontSize: screenUtil.setSp(20),
+                  currentIndex: screenIndexState,
+                  onTap: (int i) {
+                    Provider.of<ScreensController>(context, listen: false)
+                        .changeScreenIndex(i);
+                  },
                 ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

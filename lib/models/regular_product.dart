@@ -40,7 +40,10 @@ class RegularProduct implements Product {
       ownerId: json['owner_id'],
       description: json['description'],
       price: double.parse(json['price']),
-      imageUrl: regularProductsImagesStorage + json['id'] + '.' + json['imageExtension'],
+      imageUrl: regularProductsImagesStorage +
+          json['id'] +
+          '.' +
+          json['imageExtension'],
       category: json['category'],
       section: json['section'],
       quantity: int.parse(json['quantity']),

@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 class ScreensController extends ChangeNotifier {
   int screenIndex = 0;
-  int sectionsIndex = 1;
+  int sectionIndex = 0;
   bool isSearching = false;
   bool offersLoading = false;
 
@@ -17,7 +17,7 @@ class ScreensController extends ChangeNotifier {
   }
 
   void changeSectionIndex(int newIndex) {
-    sectionsIndex = newIndex;
+    sectionIndex = newIndex;
     notifyListeners();
   }
 

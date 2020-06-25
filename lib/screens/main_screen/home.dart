@@ -133,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 AssetImage('assets/brands/active.png'),
                                 AssetImage('assets/brands/zara.png'),
                               ],
-                              onImageTap: (int hotOfferIndex) {},
+                              onImageTap: (_) {},
                               autoplay: true,
                               dotBgColor: Colors.transparent,
                               dotSize: 5,
@@ -146,8 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             builder: (context, admin, child) {
                               if (admin.hotOffers.isEmpty) {
                                 return Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.6,
+                                  height: MediaQuery.of(context).size.height * 0.6,
                                   child: ColorsLoader(),
                                 );
                               } else {

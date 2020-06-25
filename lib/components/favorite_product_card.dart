@@ -34,24 +34,24 @@ class FavoriteProductCard extends StatelessWidget {
                 height: 100,
                 width: 100,
               ),
-              Flexible(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    AutoSizeText(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    child: AutoSizeText(
                       description,
-                      maxLines: 1,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(fontSize: screenUtil.setSp(18)),
                     ),
-                    AutoSizeText(
-                      '$price جنيه',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: screenUtil.setSp(18)),
-                    ),
-                  ],
-                ),
+                  ),
+                  AutoSizeText(
+                    '$price جنيه',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: screenUtil.setSp(18)),
+                  ),
+                ],
               ),
             ],
           ),
@@ -83,7 +83,7 @@ class FavoriteProductCard extends StatelessWidget {
                 ),
                 tooltip: 'حذف',
                 onPressed: onUnFavorite,
-              ),
+              )
             ],
           ),
         ],

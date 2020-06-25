@@ -35,7 +35,7 @@ class _AccountRecoveryState extends State<AccountRecovery> {
 
   Future<void> showSmsCodeVerificationDialog() async {
     String smsCode = '';
-    showDialog(
+    await showDialog(
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(

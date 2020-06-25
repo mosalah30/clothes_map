@@ -33,11 +33,11 @@ class Offer implements Product {
     this.quantity,
     this.category,
     this.imageUrl,
-    this.section,
   });
 
   factory Offer.fromJson(Map<String, dynamic> json, bool hotOffer) {
-    String imagesStorage = hotOffer ? hotOffersImagesStorage : offersImagesStorage;
+    String imagesStorage =
+        hotOffer ? hotOffersImagesStorage : offersImagesStorage;
     return Offer(
       id: int.parse(json['id']),
       ownerId: json['owner_id'],

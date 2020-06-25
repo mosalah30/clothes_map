@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
             children: <Widget>[
               Hero(
                 child: Image.asset(
-                  'assets/images/splash_logo.png',
+                  'assets/splash_logo.png',
                   height: MediaQuery.of(context).size.height * 0.16,
                 ),
                 tag: 'splash_logo',

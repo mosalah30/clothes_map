@@ -9,6 +9,7 @@ import 'package:clothes_map/utils/values.dart';
 enum UpdateResponse { succeeded, failed, noChangeWasGiven, validationError }
 
 class CustomerAccountAdmin {
+  // ignore: missing_return
   Future<UpdateResponse> updateCustomerInfo(
     String customerEmail,
     String newName,

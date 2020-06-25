@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tree_view/tree_view.dart';
 
-import 'package:clothes_map/utils/values.dart';
 import 'package:clothes_map/utils/screen_util.dart';
 import 'package:clothes_map/utils/status_bar_color.dart';
 
@@ -82,39 +80,8 @@ class _ShopState extends State<Shop> {
                         height: 0,
                         thickness: 2,
                       ),
-                      Expanded(
-                        child: TreeView(
-                          hasScrollBar: true,
-                          parentList: [
-                            Parent(
-                              parent: buildSection(context, 'الملابس'),
-                              childList: ChildList(
-                                children: buildSectionSub(
-                                  context,
-                                  clothesSectionItems,
-                                ),
-                              ),
-                            ),
-                            Parent(
-                              parent: buildSection(context, 'أحذية'),
-                              childList: ChildList(
-                                children: buildSectionSub(
-                                  context,
-                                  shoesSectionItems,
-                                ),
-                              ),
-                            ),
-                            Parent(
-                              parent: buildSection(context, 'إكسسورات'),
-                              childList: ChildList(
-                                children: buildSectionSub(
-                                  context,
-                                  accessoriesSectionItems,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      Column(
+                        children: <Widget>[],
                       ),
                     ],
                   ),

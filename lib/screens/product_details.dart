@@ -21,3 +21,21 @@ class ProductDetails extends StatelessWidget {
     );
   }
 }
+
+class ColorFullWidget extends InheritedWidget {
+  final Color color;
+
+  const ColorFullWidget(
+      {Key key, @required Widget child, this.color = Colors.white})
+      : assert(child != null, "Child can't be null!"),
+        super(key: key, child: child);
+
+  static ColorFullWidget of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<ColorFullWidget>();
+  }
+
+  @override
+  bool updateShouldNotify(ColorFullWidget oldWidget) {
+    return color != oldWidget.color;
+  }
+}

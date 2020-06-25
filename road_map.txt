@@ -1,0 +1,22 @@
+1- products browser
+
+v0.8.0pre-alpha
+
+2- shop screen
+3- product detials (including 5 stars rating)
+
+v0.9.0pre-alpha
+
+4- shopping cart
+5- customer products purchase history
+6- add payment
+
+v1.0.0alpha
+
+7- upgrade all dependencies and perform full test
+
+v1.0.0beta
+
+8- add good readme with pictures and features details
+
+v1.0.0stable

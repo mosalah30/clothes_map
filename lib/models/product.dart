@@ -3,6 +3,6 @@ abstract class Product {
   double price;
   String description;
   String imageUrl;
-  String section;
   String category;
+  String section;
 }
