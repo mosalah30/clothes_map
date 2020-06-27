@@ -1,5 +1,5 @@
 2- shop screen
-3- product detials (including 5 stars rating)
+3- product detials
 
 v0.9.0pre-alpha
 

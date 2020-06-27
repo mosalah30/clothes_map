@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 07, 2020 at 04:53 PM
+-- Generation Time: Jun 27, 2020 at 10:12 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.12
 
@@ -45,8 +45,8 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `name`, `email`, `phoneNumber`, `address`, `password`, `avatarExtension`) VALUES
-(24, 'عمار ياسر', 'ammaryaser293@gmail.com', '01000785803', '٤٠ شارع عبده خطاب - ارض اللواء - المهندسين', 'facebook', 'jpg'),
-(27, 'مصطفى ‏ياسر', 'mostafayaser99@gmail.com', '01006089184', '٤٠ شارع عبده خطاب ارض اللواء', '123456', '');
+(24, 'عمار ياسر', 'ammaryaser293@gmail.com', '01000785803', '٤٠ شارع عبده خطاب - ارض اللواء - المهندسين', '%facebook%heda7', 'jpg'),
+(27, 'مصطفى ‏ياسر', 'mostafayaser99@gmail.com', '01008303705', '٤٠ شارع عبده خطاب ارض اللواء', '123456', '');
 
 -- --------------------------------------------------------
 
@@ -99,13 +99,15 @@ INSERT INTO `shops` (`shop_id`, `owner_id`, `shopName`, `latitude`, `longitude`,
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `phoneNumber` (`phoneNumber`);
 
 --
 -- Indexes for table `dealers`
 --
 ALTER TABLE `dealers`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `phoneNumber` (`phoneNumber`);
 
 --
 -- Indexes for table `shops`
