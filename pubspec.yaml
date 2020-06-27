@@ -41,7 +41,6 @@ flutter:
 
   assets:
     - assets/splash_logo.png
-    - assets/brands/
     - assets/icons/
     - assets/sections/
 
