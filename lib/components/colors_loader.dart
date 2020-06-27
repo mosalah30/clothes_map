@@ -62,63 +62,61 @@ class _ColorsLoaderState extends State<ColorsLoader>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Transform.translate(
-            offset: Offset(
-              0.0,
-              -30 *
-                  (animation_1.value <= 0.50
-                      ? animation_1.value
-                      : 1.0 - animation_1.value),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: Dot(
-                radius: 10.0,
-                color: widget.dotOneColor,
-                icon: widget.dotIcon,
-              ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Transform.translate(
+          offset: Offset(
+            0.0,
+            -30 *
+                (animation_1.value <= 0.50
+                    ? animation_1.value
+                    : 1.0 - animation_1.value),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Dot(
+              radius: 10.0,
+              color: widget.dotOneColor,
+              icon: widget.dotIcon,
             ),
           ),
-          Transform.translate(
-            offset: Offset(
-              0.0,
-              -30 *
-                  (animation_2.value <= 0.50
-                      ? animation_2.value
-                      : 1.0 - animation_2.value),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: Dot(
-                radius: 10.0,
-                color: widget.dotTwoColor,
-                icon: widget.dotIcon,
-              ),
+        ),
+        Transform.translate(
+          offset: Offset(
+            0.0,
+            -30 *
+                (animation_2.value <= 0.50
+                    ? animation_2.value
+                    : 1.0 - animation_2.value),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Dot(
+              radius: 10.0,
+              color: widget.dotTwoColor,
+              icon: widget.dotIcon,
             ),
           ),
-          Transform.translate(
-            offset: Offset(
-              0.0,
-              -30 *
-                  (animation_3.value <= 0.50
-                      ? animation_3.value
-                      : 1.0 - animation_3.value),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: Dot(
-                radius: 10.0,
-                color: widget.dotThreeColor,
-                icon: widget.dotIcon,
-              ),
+        ),
+        Transform.translate(
+          offset: Offset(
+            0.0,
+            -30 *
+                (animation_3.value <= 0.50
+                    ? animation_3.value
+                    : 1.0 - animation_3.value),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Dot(
+              radius: 10.0,
+              color: widget.dotThreeColor,
+              icon: widget.dotIcon,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

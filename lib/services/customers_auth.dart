@@ -13,7 +13,14 @@ import 'package:clothes_map/utils/json_cleaner.dart';
 import 'package:clothes_map/utils/values.dart';
 
 enum EmailCreation { succeeded, failed, alreadyExists }
-enum EPLogin { succeeded, failed, wrongPassword, emailNotFound }
+enum EPLogin {
+  succeeded,
+  failed,
+  signedInWithGoogle,
+  signedInWithFacebook,
+  wrongPassword,
+  emailNotFound
+}
 enum SLogin { succeeded, failed, hasDifferentCredentials }
 
 class CustomerAuth {
@@ -114,19 +121,26 @@ class CustomerAuth {
         'email': email,
         'password': password,
       });
-      if (response.body == 'Email not found') {
-        return EPLogin.emailNotFound;
-      } else if (response.body == 'Wrong Password') {
-        return EPLogin.wrongPassword;
-      } else {
-        var result = response.body;
-        var userInfo = json.decode(result);
-        UserInfo userInfoClient = UserInfo();
-        userInfoClient.setInfo(
-          'customer',
-          cleanReceivedJson(userInfo),
-        );
-        return EPLogin.succeeded;
+      switch (response.body) {
+        case "SignedInWithGoogle":
+          return EPLogin.signedInWithGoogle;
+        case "SignedInWithFacebook":
+          return EPLogin.signedInWithFacebook;
+        case "WrongPassword":
+          return EPLogin.wrongPassword;
+        case "EmailNotFound":
+          return EPLogin.emailNotFound;
+        default:
+          {
+            var result = response.body;
+            var userInfo = json.decode(result);
+            UserInfo userInfoClient = UserInfo();
+            userInfoClient.setInfo(
+              'customer',
+              cleanReceivedJson(userInfo),
+            );
+            return EPLogin.succeeded;
+          }
       }
     } catch (e) {
       return EPLogin.failed;

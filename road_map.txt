@@ -1,7 +1,3 @@
-1- products browser
-
-v0.8.0pre-alpha
-
 2- shop screen
 3- product detials (including 5 stars rating)
 

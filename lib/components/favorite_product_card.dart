@@ -29,11 +29,26 @@ class FavoriteProductCard extends StatelessWidget {
         children: <Widget>[
           Row(
             children: <Widget>[
-              CachedNetworkImage(
-                imageUrl: imageUrl,
+              Container(
                 height: 100,
                 width: 100,
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Center(
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      child: CircularProgressIndicator(
+                        value: downloadProgress.progress,
+                      ),
+                    ),
+                  ),
+                  errorWidget: (context, url, error) =>
+                      Icon(Icons.error, color: Colors.red),
+                ),
               ),
+              SizedBox(width: 5),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[

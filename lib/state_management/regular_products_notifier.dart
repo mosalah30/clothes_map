@@ -4,8 +4,7 @@ import 'package:clothes_map/models/regular_product.dart';
 
 class RegularProductsNotifier extends ChangeNotifier {
   String section;
-  int minPrice = 0;
-  int maxPrice = 10000;
+  String category;
   int nextPage = 1;
   bool hasMore = true;
 
@@ -24,8 +23,8 @@ class RegularProductsNotifier extends ChangeNotifier {
   }
 
   void reset() {
-    nextPage = 1;
     hasMore = true;
+    nextPage = 1;
     regularProducts = List<RegularProduct>();
   }
 }

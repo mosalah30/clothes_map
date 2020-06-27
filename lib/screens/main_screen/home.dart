@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:carousel_pro/carousel_pro.dart';
 
 import 'package:clothes_map/components/colors_loader.dart';
 import 'package:clothes_map/components/offer_card.dart';
@@ -115,42 +114,19 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           searchingState
               ? ProductsSearch(searchController.text)
-              : Expanded(
-                  child: Container(
-                    child: SingleChildScrollView(
-                      controller: scrollController,
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            height: MediaQuery.of(context).size.height * 0.2,
-                            child: Carousel(
-                              animationDuration: Duration(seconds: 3),
-                              autoplayDuration: Duration(seconds: 4),
-                              boxFit: BoxFit.cover,
-                              images: [
-                                AssetImage('assets/brands/adidas.png'),
-                                AssetImage('assets/brands/H&M.jpg'),
-                                AssetImage('assets/brands/active.png'),
-                                AssetImage('assets/brands/zara.png'),
-                              ],
-                              onImageTap: (_) {},
-                              autoplay: true,
-                              dotBgColor: Colors.transparent,
-                              dotSize: 5,
-                              dotColor: Colors.grey,
-                              dotIncreasedColor: Colors.blue,
-                              indicatorBgPadding: 2,
-                            ),
-                          ),
-                          Consumer<OffersNotifier>(
-                            builder: (context, admin, child) {
-                              if (admin.hotOffers.isEmpty) {
-                                return Container(
-                                  height: MediaQuery.of(context).size.height * 0.6,
-                                  child: ColorsLoader(),
-                                );
-                              } else {
-                                return Wrap(
+              : Flexible(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Consumer<OffersNotifier>(
+                        builder: (context, admin, child) {
+                          if (admin.hotOffers.isEmpty) {
+                            return ColorsLoader();
+                          } else {
+                            return Flexible(
+                              child: SingleChildScrollView(
+                                controller: scrollController,
+                                child: Wrap(
                                   direction: Axis.horizontal,
                                   children: <Widget>[
                                     for (var offer in admin.hotOffers)
@@ -165,26 +141,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                         section: offer.section,
                                       ),
                                   ],
-                                );
-                              }
-                            },
-                          ),
-                          Selector<ScreensController, bool>(
-                            selector: (context, screensController) =>
-                                screensController.offersLoading,
-                            builder: (context, isLoading, child) =>
-                                isLoading && offersNotifier.hasMore
-                                    ? Container(
-                                        height: 50,
-                                        child: Center(
-                                          child: ColorsLoader(),
-                                        ),
-                                      )
-                                    : Container(height: 0),
-                          )
-                        ],
+                                ),
+                              ),
+                            );
+                          }
+                        },
                       ),
-                    ),
+                      Selector<ScreensController, bool>(
+                        selector: (context, screensController) =>
+                            screensController.offersLoading,
+                        builder: (context, isLoading, child) =>
+                            isLoading && offersNotifier.hasMore
+                                ? Container(
+                                    height: 50,
+                                    child: Center(
+                                      child: ColorsLoader(),
+                                    ),
+                                  )
+                                : Container(height: 0),
+                      )
+                    ],
                   ),
                 ),
         ],

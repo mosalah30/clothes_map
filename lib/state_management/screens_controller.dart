@@ -5,6 +5,7 @@ class ScreensController extends ChangeNotifier {
   int sectionIndex = 0;
   bool isSearching = false;
   bool offersLoading = false;
+  bool regularProductsLoading = false;
 
   void changeScreenIndex(int newIndex) {
     screenIndex = newIndex;
@@ -21,8 +22,13 @@ class ScreensController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeOffersLoaderState(newBool) {
+  void changeOffersLoaderState(bool newBool) {
     offersLoading = newBool;
+    notifyListeners();
+  }
+
+  void changeRegularProductsLoaderState(bool newBool) {
+    regularProductsLoading = newBool;
     notifyListeners();
   }
 }

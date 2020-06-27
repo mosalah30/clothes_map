@@ -3,14 +3,14 @@
 require_once('db_connection.php');
 
 $section = $_POST['section'];
-$minPrice = $_POST['minPrice'];
-$maxPrice = $_POST['maxPrice'];
+$category = $_POST['category'];
 $requestedPage = $_POST['nextPage'];
 
 $receivedRegularProducts = ($requestedPage - 1) * 10;
 
 $getPageSql = "SELECT * FROM `regular_products` WHERE `section` = '$section'
- ORDER BY `price` LIMIT $receivedRegularProducts, 10";
+AND `category` = '$category'
+ORDER BY `price` LIMIT $receivedRegularProducts, 10";
 
 $response = $db->query($getPageSql);
 

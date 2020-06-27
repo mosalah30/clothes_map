@@ -22,7 +22,6 @@ class Offer implements Product {
 
   final String ownerId;
   final double priceBeforeDiscount;
-  final int quantity;
 
   Offer({
     this.id,
@@ -30,7 +29,6 @@ class Offer implements Product {
     this.description,
     this.price,
     this.priceBeforeDiscount,
-    this.quantity,
     this.category,
     this.imageUrl,
   });
@@ -44,9 +42,8 @@ class Offer implements Product {
       description: json['description'],
       price: double.parse(json['price']),
       priceBeforeDiscount: double.parse(json['priceBeforeDiscount']),
-      imageUrl: imagesStorage + json['id'] + '.' + json['imageExtension'],
+      imageUrl: imagesStorage + json['id'] + '.jpg',
       category: json['category'],
-      quantity: int.parse(json['quantity']),
     );
   }
 }

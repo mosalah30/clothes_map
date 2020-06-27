@@ -14,7 +14,7 @@ import 'package:clothes_map/utils/styles.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  Admob.initialize(testDeviceIds: ["64CF294066C542DC", "1E633D5C18BEDDEF"]);
+  Admob.initialize("ca-app-pub-2775719056787328~5250289347");
   runApp(ClothesMap());
 }
 

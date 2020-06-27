@@ -17,8 +17,7 @@ class RegularProductsClient {
         body: {
           'nextPage': '${regularProductsNotifier.nextPage}',
           'section': regularProductsNotifier.section,
-          'minPrice': '${regularProductsNotifier.minPrice}',
-          'maxPrice': '${regularProductsNotifier.maxPrice}',
+          'category': regularProductsNotifier.category,
         },
       );
 

@@ -7,7 +7,7 @@ packages:
       name: admob_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0-beta.4"
+    version: "0.3.4"
   app_settings:
     dependency: "direct main"
     description:
@@ -36,13 +36,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.0+1"
-  carousel_pro:
-    dependency: "direct main"
-    description:
-      name: carousel_pro
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   charcode:
     dependency: transitive
     description:
@@ -221,13 +214,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.3.1"
-  get:
-    dependency: "direct main"
-    description:
-      name: get
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.10.3"
   google_api_availability:
     dependency: transitive
     description:

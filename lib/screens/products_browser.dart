@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:clothes_map/components/colors_loader.dart';
 import 'package:clothes_map/components/regular_product_card.dart';
+import 'package:clothes_map/state_management/screens_controller.dart';
 import 'package:clothes_map/state_management/regular_products_notifier.dart';
 import 'package:clothes_map/services/regular_products_client.dart';
 
@@ -18,19 +19,8 @@ class ProductsBrowser extends StatefulWidget {
 class _ProductsBrowserState extends State<ProductsBrowser> {
   RegularProductsNotifier regularProductsNotifier;
   RegularProductsClient regularProductsClient;
+  ScreensController screensController;
   ScrollController scrollController;
-
-  Future<void> showFilterBottomSheet() async {
-    await showModalBottomSheet(
-      context: context,
-      builder: (context) => Container(
-        height: MediaQuery.of(context).size.height / 3,
-        child: Column(
-          children: <Widget>[],
-        ),
-      ),
-    );
-  }
 
   @override
   void initState() {
@@ -38,17 +28,20 @@ class _ProductsBrowserState extends State<ProductsBrowser> {
     regularProductsNotifier = Provider.of<RegularProductsNotifier>(
       context,
       listen: false,
-    )..section = widget.section.split(" ")[0];
+    );
+    regularProductsNotifier.section = widget.section.split(" ")[0];
+    regularProductsNotifier.category = widget.section.split(" ")[1];
     regularProductsClient = RegularProductsClient(regularProductsNotifier);
+    screensController = Provider.of<ScreensController>(context, listen: false);
     scrollController = ScrollController();
     regularProductsClient.getRegularProducts();
     scrollController.addListener(() async {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
-//        screensController.changeOffersLoaderState(true);
+        screensController.changeRegularProductsLoaderState(true);
         regularProductsNotifier.nextPage++;
         await regularProductsClient.getRegularProducts();
-//        screensController.changeOffersLoaderState(false);
+        screensController.changeRegularProductsLoaderState(false);
       }
     });
   }
@@ -73,27 +66,42 @@ class _ProductsBrowserState extends State<ProductsBrowser> {
           builder: (context, admin, child) {
             if (admin.regularProducts.isEmpty) {
               return Container(
-                height: MediaQuery.of(context).size.height,
+                height: double.maxFinite,
                 child: ColorsLoader(),
               );
             } else {
               final data = regularProductsNotifier.regularProducts;
-              return ListView.builder(
-                itemCount: data.length,
-                controller: scrollController,
-                itemBuilder: (context, i) => RegularProductCard(
-                  id: data[i].id,
-                  price: data[i].price,
-                  description: data[i].description,
-                  imageUrl: data[i].imageUrl,
-                ),
+              return Column(
+                children: <Widget>[
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: data.length,
+                      controller: scrollController,
+                      itemBuilder: (context, i) => RegularProductCard(
+                        id: data[i].id,
+                        price: data[i].price,
+                        description: data[i].description,
+                        imageUrl: data[i].imageUrl,
+                      ),
+                    ),
+                  ),
+                  Selector<ScreensController, bool>(
+                    selector: (context, screensController) =>
+                        screensController.regularProductsLoading,
+                    builder: (context, isLoading, child) =>
+                        isLoading && regularProductsNotifier.hasMore
+                            ? Container(
+                                height: 50,
+                                child: Center(
+                                  child: ColorsLoader(),
+                                ),
+                              )
+                            : Container(height: 0),
+                  )
+                ],
               );
             }
           },
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.filter_list),
-          onPressed: () => showFilterBottomSheet(),
         ),
       ),
     );

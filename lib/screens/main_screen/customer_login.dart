@@ -109,17 +109,30 @@ class _CustomerLoginState extends State<CustomerLogin> {
                                   loginAdmin.passwordController.text,
                                 );
                                 switch (dbResponse) {
-                                  case EPLogin.failed:
+                                  case EPLogin.signedInWithGoogle:
                                     Fluttertoast.showToast(
-                                        msg: 'فشل التحقق من الحساب');
+                                      msg: "هذا الحساب مسجل بجوجل",
+                                    );
                                     break;
-                                  case EPLogin.emailNotFound:
+                                  case EPLogin.signedInWithFacebook:
                                     Fluttertoast.showToast(
-                                        msg: 'هذا الحساب غير مسجل');
+                                      msg: "هذا الحساب مسجل بالفيس بوك",
+                                    );
                                     break;
                                   case EPLogin.wrongPassword:
                                     Fluttertoast.showToast(
-                                        msg: 'كلمة مرور خاطئة');
+                                      msg: 'كلمة مرور خاطئة',
+                                    );
+                                    break;
+                                  case EPLogin.emailNotFound:
+                                    Fluttertoast.showToast(
+                                      msg: 'هذا الحساب غير مسجل',
+                                    );
+                                    break;
+                                  case EPLogin.failed:
+                                    Fluttertoast.showToast(
+                                      msg: 'فشل التحقق من الحساب',
+                                    );
                                     break;
                                   case EPLogin.succeeded:
                                     await Provider.of<UserInfo>(

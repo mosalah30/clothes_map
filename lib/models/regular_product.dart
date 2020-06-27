@@ -20,7 +20,6 @@ class RegularProduct implements Product {
   @override
   String category;
 
-  final int quantity;
   final String ownerId;
 
   RegularProduct({
@@ -31,7 +30,6 @@ class RegularProduct implements Product {
     this.imageUrl,
     this.category,
     this.section,
-    this.quantity,
   });
 
   factory RegularProduct.fromJson(Map<String, dynamic> json) {
@@ -40,13 +38,9 @@ class RegularProduct implements Product {
       ownerId: json['owner_id'],
       description: json['description'],
       price: double.parse(json['price']),
-      imageUrl: regularProductsImagesStorage +
-          json['id'] +
-          '.' +
-          json['imageExtension'],
+      imageUrl: regularProductsImagesStorage + json['id'] + '.jpg',
       category: json['category'],
       section: json['section'],
-      quantity: int.parse(json['quantity']),
     );
   }
 }
