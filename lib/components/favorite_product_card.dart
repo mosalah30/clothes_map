@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -48,25 +49,23 @@ class FavoriteProductCard extends StatelessWidget {
                       Icon(Icons.error, color: Colors.red),
                 ),
               ),
-              SizedBox(width: 5),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: AutoSizeText(
-                      description,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: screenUtil.setSp(18)),
-                    ),
-                  ),
-                  AutoSizeText(
-                    '$price جنيه',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: screenUtil.setSp(18)),
-                  ),
-                ],
+            ],
+          ),
+          SizedBox(width: 5),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              AutoSizeText(
+                description,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: screenUtil.setSp(18)),
+              ),
+              AutoSizeText(
+                '$price جنيه',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: screenUtil.setSp(18)),
               ),
             ],
           ),

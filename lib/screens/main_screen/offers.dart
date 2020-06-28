@@ -77,8 +77,6 @@ class _OffersScreenState extends State<OffersScreen> {
                               description: offer.description,
                               price: offer.price,
                               priceBeforeDiscount: offer.priceBeforeDiscount,
-                              section: offer.section,
-                              category: offer.category,
                             ),
                         ],
                       );

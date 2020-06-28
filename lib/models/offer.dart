@@ -14,12 +14,6 @@ class Offer implements Product {
   @override
   String imageUrl;
 
-  @override
-  String section;
-
-  @override
-  String category;
-
   final String ownerId;
   final double priceBeforeDiscount;
 
@@ -29,7 +23,6 @@ class Offer implements Product {
     this.description,
     this.price,
     this.priceBeforeDiscount,
-    this.category,
     this.imageUrl,
   });
 
@@ -43,7 +36,6 @@ class Offer implements Product {
       price: double.parse(json['price']),
       priceBeforeDiscount: double.parse(json['priceBeforeDiscount']),
       imageUrl: imagesStorage + json['id'] + '.jpg',
-      category: json['category'],
     );
   }
 }

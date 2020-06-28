@@ -15,12 +15,6 @@ class Order implements Product {
   @override
   String imageUrl;
 
-  @override
-  String section;
-
-  @override
-  String category;
-
   final OrderStatus orderStatus;
   final DateTime purchaseDate;
 
@@ -28,9 +22,7 @@ class Order implements Product {
     this.id,
     this.price,
     this.imageUrl,
-    this.section,
     this.description,
-    this.category,
     this.orderStatus,
     this.purchaseDate,
   });

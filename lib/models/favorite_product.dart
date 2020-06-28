@@ -13,19 +13,11 @@ class FavoriteProduct implements Product {
   @override
   String imageUrl;
 
-  @override
-  String section;
-
-  @override
-  String category;
-
   FavoriteProduct({
     this.id,
     this.description,
     this.price,
     this.imageUrl,
-    this.category,
-    this.section,
   });
 
   Map<String, dynamic> toMap() {
@@ -34,8 +26,6 @@ class FavoriteProduct implements Product {
       'description': description,
       'price': price,
       'imageUrl': imageUrl,
-      'category': category.toString(),
-      'section': section,
     };
     return map;
   }
@@ -45,7 +35,5 @@ class FavoriteProduct implements Product {
     description = map['description'];
     price = map['price'];
     imageUrl = map['imageUrl'];
-    category = map['category'];
-    section = map['section'];
   }
 }

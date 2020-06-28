@@ -28,7 +28,7 @@ class FavoriteProductsDbHelper {
     await db.execute(
       """
         CREATE TABLE favorite_products (id INTEGER, description TEXT,
-        price REAL, imageUrl TEXT, section TEXT, category TEXT)
+        price REAL, imageUrl TEXT)
      """,
     );
   }
@@ -37,14 +37,7 @@ class FavoriteProductsDbHelper {
     var dbClient = await db;
     List<Map> maps = await dbClient.query(
       'favorite_products',
-      columns: [
-        'id',
-        'description',
-        'price',
-        'imageUrl',
-        'category',
-        'section'
-      ],
+      columns: ['id', 'description', 'price', 'imageUrl'],
     );
     List<FavoriteProduct> favoriteProducts = [];
     if (maps.length > 0) {
@@ -64,26 +57,27 @@ class FavoriteProductsDbHelper {
     return favoriteProduct;
   }
 
-  Future<bool> favoriteProductExists(int id, String section) async {
+  Future<bool> favoriteProductExists(int id, String description) async {
     var dbClient = await db;
     var queryResult = await dbClient.rawQuery(
-      "SELECT * FROM `favorite_products` WHERE `section` = '$section' AND `id` = '$id'",
+      "SELECT * FROM `favorite_products` WHERE `description` = '$description' AND `id` = '$id'",
     );
     bool recordExists = queryResult.isNotEmpty;
     return recordExists;
   }
 
-  Future<int> delete(int id, String section) async {
+  Future<int> delete(int id, String description) async {
     var dbClient = await db;
     return await dbClient.delete(
       'favorite_products',
-      where: 'id = ? AND section = ?',
-      whereArgs: [id, section],
+      where: 'id = ? AND description = ?',
+      whereArgs: [id, description],
     );
   }
 
   Future close() async {
     var dbClient = await db;
     dbClient.close();
+    _db = null;
   }
 }

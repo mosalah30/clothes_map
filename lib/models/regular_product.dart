@@ -14,12 +14,8 @@ class RegularProduct implements Product {
   @override
   String imageUrl;
 
-  @override
-  String section;
-
-  @override
-  String category;
-
+  final String section;
+  final String category;
   final String ownerId;
 
   RegularProduct({

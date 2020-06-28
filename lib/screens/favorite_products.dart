@@ -38,7 +38,7 @@ class _FavoriteProductsScreenState extends State<FavoriteProductsScreen> {
                 price: product.price,
                 imageUrl: product.imageUrl,
                 onUnFavorite: () async {
-                  await dbHelper.delete(product.id, product.section);
+                  await dbHelper.delete(product.id, product.description);
                   refreshFavoriteProductsList();
                 },
               ),
@@ -53,14 +53,16 @@ class _FavoriteProductsScreenState extends State<FavoriteProductsScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize:
-              Size(double.maxFinite, MediaQuery.of(context).size.height * 0.07),
+          preferredSize: Size(
+            double.maxFinite,
+            MediaQuery.of(context).size.height * 0.075,
+          ),
           child: Container(
             color: Theme.of(context).primaryColor,
             child: Center(
               child: Image.asset(
-                'assets/images/splash_logo.png',
-                height: 70,
+                'assets/splash_logo.png',
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -68,16 +70,12 @@ class _FavoriteProductsScreenState extends State<FavoriteProductsScreen> {
         backgroundColor: Colors.white,
         body: Directionality(
           textDirection: TextDirection.rtl,
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: FutureBuilder(
-              future: favoriteProducts,
-              builder: (context, snapshot) {
-                if (snapshot.hasData && snapshot.data.length > 0) {
-                  return generateFavoriteProductsList(snapshot.data);
-                } else if (snapshot.data == null || snapshot.data.length == 0) {
-                  return Column(
+          child: FutureBuilder(
+            future: favoriteProducts,
+            builder: (context, snapshot) {
+              if (snapshot.data == null || snapshot.data.length == 0) {
+                return Center(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Image.asset(
@@ -94,13 +92,15 @@ class _FavoriteProductsScreenState extends State<FavoriteProductsScreen> {
                         ),
                       ),
                     ],
-                  );
-                }
-                return Expanded(
-                  child: ColorsLoader(),
+                  ),
                 );
-              },
-            ),
+              } else if (snapshot.hasData && snapshot.data.length > 0) {
+                return generateFavoriteProductsList(snapshot.data);
+              }
+              return Expanded(
+                child: ColorsLoader(),
+              );
+            },
           ),
         ),
       ),
@@ -109,7 +109,7 @@ class _FavoriteProductsScreenState extends State<FavoriteProductsScreen> {
 
   @override
   void dispose() {
-    super.dispose();
     dbHelper.close();
+    super.dispose();
   }
 }

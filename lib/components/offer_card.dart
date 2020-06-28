@@ -15,8 +15,6 @@ class OfferCard extends StatefulWidget {
   final double priceBeforeDiscount;
   final String imageUrl;
   final String description;
-  final String section;
-  final String category;
 
   OfferCard({
     this.id,
@@ -24,8 +22,6 @@ class OfferCard extends StatefulWidget {
     this.price,
     this.priceBeforeDiscount,
     this.description,
-    this.section,
-    this.category,
   });
 
   @override
@@ -47,7 +43,7 @@ class _OfferCardState extends State<OfferCard> {
   void getFavoriteBool() async {
     bool newBool = await _dbHelper.favoriteProductExists(
       widget.id,
-      widget.section,
+      widget.description,
     );
     setState(() {
       favorite = newBool ?? false;
@@ -93,15 +89,13 @@ class _OfferCardState extends State<OfferCard> {
                     ),
                     onPressed: () async {
                       if (favorite) {
-                        await _dbHelper.delete(widget.id, widget.section);
+                        await _dbHelper.delete(widget.id, widget.description);
                       } else {
                         FavoriteProduct newFavoriteProduct = FavoriteProduct(
                           id: widget.id,
                           description: widget.description,
                           price: widget.price,
                           imageUrl: widget.imageUrl,
-                          category: widget.category,
-                          section: widget.section,
                         );
                         await _dbHelper.add(newFavoriteProduct);
                       }
