@@ -10,6 +10,7 @@ import 'package:clothes_map/utils/screen_util.dart';
 import 'package:clothes_map/utils/custom_cached_image.dart';
 
 class OfferCard extends StatefulWidget {
+  final bool isHotOffer;
   final int id;
   final double price;
   final double priceBeforeDiscount;
@@ -17,6 +18,7 @@ class OfferCard extends StatefulWidget {
   final String description;
 
   OfferCard({
+    this.isHotOffer = false,
     this.id,
     this.imageUrl,
     this.price,
@@ -152,7 +154,7 @@ class _OfferCardState extends State<OfferCard> {
           Navigator.of(context).push(
             FadeRoute(
               newScreen: ProductDetails(
-                true,
+                widget.isHotOffer,
                 productId: widget.id,
                 productPrice: widget.price,
                 productDescription: widget.description,

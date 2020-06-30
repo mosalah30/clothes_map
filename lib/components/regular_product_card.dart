@@ -30,6 +30,7 @@ class RegularProductCard extends StatelessWidget {
             FadeRoute(
               newScreen: ProductDetails(
                 false,
+                productsRefreshRequired: false,
                 productId: this.id,
                 imageUrl: this.imageUrl,
                 productDescription: this.description,

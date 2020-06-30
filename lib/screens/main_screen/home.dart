@@ -137,6 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         price: offer.price,
                                         priceBeforeDiscount:
                                             offer.priceBeforeDiscount,
+                                        isHotOffer: true,
                                       ),
                                   ],
                                 ),

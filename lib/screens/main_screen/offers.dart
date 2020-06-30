@@ -50,7 +50,7 @@ class _OffersScreenState extends State<OffersScreen> {
             builder: (context, admin, child) {
               if (admin.offers.isEmpty) {
                 return Container(
-                  height: MediaQuery.of(context).size.height * 0.82,
+                  height: MediaQuery.of(context).size.height,
                   child: ColorsLoader(),
                 );
               } else {
