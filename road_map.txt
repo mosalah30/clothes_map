@@ -1,18 +1,17 @@
-2- shop screen
-3- product detials
+1- product detials
 
 v0.9.0pre-alpha
 
-4- shopping cart
-5- customer products purchase history
-6- add payment
+2- shopping cart
+3- customer products purchase history
+4- add payment
 
 v1.0.0alpha
 
-7- upgrade all dependencies and perform full test
+5- upgrade all dependencies and perform full test
 
 v1.0.0beta
 
-8- add good readme with pictures and features details
+6- add good readme with pictures and features details
 
 v1.0.0stable

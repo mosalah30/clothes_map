@@ -64,7 +64,7 @@ class _ShoppingMapScreenState extends State<ShoppingMapScreen> {
             flex: 1,
             child: AdmobBanner(
               adSize: AdmobBannerSize.BANNER,
-              adUnitId: shoppingMapAdUnitId,
+              adUnitId: "ca-app-pub-2775719056787328/4147895000",
             ),
           ),
         ],

@@ -30,8 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
     screensController = Provider.of<ScreensController>(context, listen: false);
     scrollController = ScrollController();
     searchController = TextEditingController();
-    offersClient = OffersClient(offersNotifier);
     changeStatusBarColor(appPrimaryColor, false);
+    offersClient = OffersClient(offersNotifier);
     offersClient.getOffers('hot_offers');
     scrollController.addListener(() async {
       if (scrollController.position.pixels ==

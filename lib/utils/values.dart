@@ -1,9 +1,5 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-const shoppingMapAdUnitId = "ca-app-pub-2775719056787328/4147895000";
-const offersAdUnitId = "ca-app-pub-2775719056787328/5962419995";
-const productDetailsAdUnitId = "ca-app-pub-2775719056787328/1935545070";
-
 const appDomain = "https://clothes-map.000webhostapp.com";
 
 const shopsMarkersStorage = "$appDomain/backend/content/dealers_shops_markers/";

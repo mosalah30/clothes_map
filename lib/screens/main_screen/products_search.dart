@@ -45,12 +45,12 @@ class _ProductsSearchState extends State<ProductsSearch> {
         children: <Widget>[
           for (var product in results)
             SearchResultCard(
+              id: product.id,
               imageUrl: product.imageUrl,
               price: product.price,
               description: product.description,
               section: product.section,
               category: product.category,
-              onTap: () => print(product.ownerId),
             ),
           Selector<SearchResultsNotifier, bool>(
             selector: (context, searchResultsNotifier) =>

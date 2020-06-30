@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
+import 'package:clothes_map/screens/product_details.dart';
 import 'package:clothes_map/utils/screen_util.dart';
+import 'package:clothes_map/utils/custom_cached_image.dart';
+import 'package:clothes_map/utils/transitions.dart';
 
 class RegularProductCard extends StatelessWidget {
   final int id;
@@ -23,7 +25,19 @@ class RegularProductCard extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: FlatButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            FadeRoute(
+              newScreen: ProductDetails(
+                false,
+                productId: this.id,
+                imageUrl: this.imageUrl,
+                productDescription: this.description,
+                productPrice: this.price,
+              ),
+            ),
+          );
+        },
         padding: EdgeInsets.all(0),
         child: Card(
           elevation: 2,
@@ -32,25 +46,7 @@ class RegularProductCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Container(
-                  height: 100,
-                  width: 100,
-                  child: CachedNetworkImage(
-                    imageUrl: imageUrl,
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) => Center(
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        child: CircularProgressIndicator(
-                          value: downloadProgress.progress,
-                        ),
-                      ),
-                    ),
-                    errorWidget: (context, url, error) =>
-                        Icon(Icons.error, color: Colors.red),
-                  ),
-                ),
+                getCacheImage(imageUrl, 100),
                 SizedBox(width: 5),
                 Expanded(
                   child: AutoSizeText(

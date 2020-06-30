@@ -59,7 +59,7 @@ class _CustomerLoginState extends State<CustomerLogin> {
                         color: Theme.of(context).primaryColor,
                         child: Image.asset(
                           "assets/splash_logo.png",
-                          height: MediaQuery.of(context).size.height * 0.16,
+                          height: MediaQuery.of(context).size.height * 0.13,
                         ),
                         alignment: Alignment.center,
                       ),

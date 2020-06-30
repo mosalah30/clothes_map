@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:clothes_map/screens/product_details.dart';
 import 'package:clothes_map/services/favorite_products_db_helper.dart';
@@ -8,6 +7,7 @@ import 'package:clothes_map/models/favorite_product.dart';
 import 'package:clothes_map/utils/transitions.dart';
 import 'package:clothes_map/utils/status_bar_color.dart';
 import 'package:clothes_map/utils/screen_util.dart';
+import 'package:clothes_map/utils/custom_cached_image.dart';
 
 class OfferCard extends StatefulWidget {
   final int id;
@@ -106,24 +106,7 @@ class _OfferCardState extends State<OfferCard> {
                   ),
                 ],
               ),
-              Container(
-                height: 200,
-                child: CachedNetworkImage(
-                  imageUrl: widget.imageUrl,
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      Center(
-                    child: Container(
-                      height: 40,
-                      width: 40,
-                      child: CircularProgressIndicator(
-                        value: downloadProgress.progress,
-                      ),
-                    ),
-                  ),
-                  errorWidget: (context, url, error) =>
-                      Icon(Icons.error, color: Colors.red),
-                ),
-              ),
+              getCacheImage(widget.imageUrl, 200),
               AutoSizeText(
                 widget.description,
                 maxLines: 1,
@@ -167,7 +150,15 @@ class _OfferCardState extends State<OfferCard> {
         onPressed: () {
           changeStatusBarColor(Colors.black, true);
           Navigator.of(context).push(
-            ScaleTransitionEffect(newScreen: ProductDetails()),
+            FadeRoute(
+              newScreen: ProductDetails(
+                true,
+                productId: widget.id,
+                productPrice: widget.price,
+                productDescription: widget.description,
+                imageUrl: widget.imageUrl,
+              ),
+            ),
           );
         },
       ),

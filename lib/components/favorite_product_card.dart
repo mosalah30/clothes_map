@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:clothes_map/utils/screen_util.dart';
+import 'package:clothes_map/utils/custom_cached_image.dart';
 
 class FavoriteProductCard extends StatelessWidget {
   final int id;
@@ -30,25 +29,7 @@ class FavoriteProductCard extends StatelessWidget {
         children: <Widget>[
           Row(
             children: <Widget>[
-              Container(
-                height: 100,
-                width: 100,
-                child: CachedNetworkImage(
-                  imageUrl: imageUrl,
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      Center(
-                    child: Container(
-                      height: 40,
-                      width: 40,
-                      child: CircularProgressIndicator(
-                        value: downloadProgress.progress,
-                      ),
-                    ),
-                  ),
-                  errorWidget: (context, url, error) =>
-                      Icon(Icons.error, color: Colors.red),
-                ),
-              ),
+              getCacheImage(imageUrl, 100),
             ],
           ),
           SizedBox(width: 5),

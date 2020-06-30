@@ -3,7 +3,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -58,16 +58,14 @@ class ShopsMarkersNotifier extends ChangeNotifier {
             '$shopsMarkersStorage/${shop['phoneNumber']}.${shop['markerExtension']}',
           );
           Marker newMarker = Marker(
-            markerId: MarkerId(shop['shop_category']),
+            markerId: MarkerId(shop['shop_id']),
             position: LatLng(
               double.parse(shop['latitude']),
               double.parse(shop['longitude']),
             ),
             icon: BitmapDescriptor.fromBytes(markerByteData),
             infoWindow: InfoWindow(title: shop['shopName']),
-            onTap: () {
-              print(shop['owner_id']);
-            },
+            onTap: () {},
           );
           if (!markers.contains(newMarker)) {
             markers.add(newMarker);

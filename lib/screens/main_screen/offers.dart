@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:admob_flutter/admob_flutter.dart';
 
 import 'package:clothes_map/components/offer_card.dart';
 import 'package:clothes_map/components/colors_loader.dart';
@@ -8,7 +7,6 @@ import 'package:clothes_map/state_management/screens_controller.dart';
 import 'package:clothes_map/state_management/offers_notifier.dart';
 import 'package:clothes_map/services/offers_client.dart';
 import 'package:clothes_map/utils/screen_util.dart';
-import 'package:clothes_map/utils/values.dart';
 
 class OffersScreen extends StatefulWidget {
   @override
@@ -44,63 +42,49 @@ class _OffersScreenState extends State<OffersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Expanded(
-          flex: 1,
-          child: AdmobBanner(
-            adUnitId: offersAdUnitId,
-            adSize: AdmobBannerSize.BANNER,
+    return SingleChildScrollView(
+      controller: scrollController,
+      child: Column(
+        children: <Widget>[
+          Consumer<OffersNotifier>(
+            builder: (context, admin, child) {
+              if (admin.offers.isEmpty) {
+                return Container(
+                  height: MediaQuery.of(context).size.height * 0.82,
+                  child: ColorsLoader(),
+                );
+              } else {
+                return Wrap(
+                  direction: Axis.horizontal,
+                  children: <Widget>[
+                    for (var offer in admin.offers)
+                      OfferCard(
+                        id: offer.id,
+                        imageUrl: offer.imageUrl,
+                        description: offer.description,
+                        price: offer.price,
+                        priceBeforeDiscount: offer.priceBeforeDiscount,
+                      ),
+                  ],
+                );
+              }
+            },
           ),
-        ),
-        Expanded(
-          flex: 9,
-          child: SingleChildScrollView(
-            controller: scrollController,
-            child: Column(
-              children: <Widget>[
-                Consumer<OffersNotifier>(
-                  builder: (context, admin, child) {
-                    if (admin.offers.isEmpty) {
-                      return Container(
-                        height: MediaQuery.of(context).size.height * 0.82,
-                        child: ColorsLoader(),
-                      );
-                    } else {
-                      return Wrap(
-                        direction: Axis.horizontal,
-                        children: <Widget>[
-                          for (var offer in admin.offers)
-                            OfferCard(
-                              id: offer.id,
-                              imageUrl: offer.imageUrl,
-                              description: offer.description,
-                              price: offer.price,
-                              priceBeforeDiscount: offer.priceBeforeDiscount,
-                            ),
-                        ],
-                      );
-                    }
-                  },
-                ),
-                Selector<ScreensController, bool>(
-                  selector: (context, screensController) =>
-                      screensController.offersLoading,
-                  builder: (context, isLoading, child) =>
-                      isLoading && offersNotifier.hasMore
-                          ? Container(
-                              height: 50,
-                              child: Center(
-                                child: ColorsLoader(),
-                              ),
-                            )
-                          : Container(height: 0),
-                )
-              ],
-            ),
-          ),
-        ),
-      ],
+          Selector<ScreensController, bool>(
+            selector: (context, screensController) =>
+                screensController.offersLoading,
+            builder: (context, isLoading, child) =>
+                isLoading && offersNotifier.hasMore
+                    ? Container(
+                        height: 50,
+                        child: Center(
+                          child: ColorsLoader(),
+                        ),
+                      )
+                    : Container(height: 0),
+          )
+        ],
+      ),
     );
   }
 

@@ -31,7 +31,7 @@ class _MainWidgetState extends State<MainWidget> {
         title: Hero(
           child: Image.asset(
             'assets/splash_logo.png',
-            height: deviceHeight * 0.07,
+            height: deviceHeight * 0.065,
           ),
           tag: 'splash_logo',
         ),
