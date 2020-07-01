@@ -1,7 +1,7 @@
 name: clothes_map
 description: clothes shopping app
 publish_to: 'none'
-version: 0.9.5+pre-alpha
+version: 1.0.0+alpha
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

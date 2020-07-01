@@ -45,7 +45,7 @@ class _ProductDetailsState extends State<ProductDetails> {
       animType: AnimType.TOPSLIDE,
       padding: EdgeInsets.all(0),
       title: "!تم الإضافة بنجاح",
-      desc: "يمكنك الآن شراء هذا المنتج من عربة التسوق",
+      desc: "يمكنك شراء هذا المنتج من عربة التسوق",
       dismissOnTouchOutside: true,
       headerAnimationLoop: false,
     ).show();

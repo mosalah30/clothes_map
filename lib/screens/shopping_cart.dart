@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 import 'package:clothes_map/components/regular_product_card.dart';
 import 'package:clothes_map/components/colors_loader.dart';
@@ -14,7 +15,7 @@ class ShoppingCart extends StatefulWidget {
 
 class _ShoppingCartState extends State<ShoppingCart> {
   OrdersDbHelper dbHelper;
-  Future<List<Order>> orders;
+  Future<List<Order>> _orders;
 
   @override
   void initState() {
@@ -25,7 +26,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   void refreshOrdersList() {
     setState(() {
-      orders = dbHelper.getOrders();
+      _orders = dbHelper.getOrders();
     });
   }
 
@@ -51,6 +52,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
 
+  Future<void> paymentSuccess() async {
+    await AwesomeDialog(
+      context: context,
+      dialogType: DialogType.SUCCES,
+      animType: AnimType.TOPSLIDE,
+      padding: EdgeInsets.all(0),
+      title: "!تم الشراء",
+      desc: "",
+      dismissOnTouchOutside: true,
+      headerAnimationLoop: false,
+    ).show();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -65,43 +79,78 @@ class _ShoppingCartState extends State<ShoppingCart> {
             centerTitle: true,
             title: Text(
               "عربة التسوق",
-              style: TextStyle(fontSize: 25, fontFamily: "Cairo"),
+              style: TextStyle(
+                fontSize: 25,
+                fontFamily: "Cairo",
+              ),
             ),
             leading: Container(),
           ),
           body: Directionality(
             textDirection: TextDirection.rtl,
-            child: FutureBuilder(
-              future: orders,
-              builder: (context, snapshot) {
-                if (snapshot.data == null || snapshot.data.length == 0) {
-                  return Center(
-                    child: Column(
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  flex: 9,
+                  child: FutureBuilder(
+                    future: _orders,
+                    builder: (context, snapshot) {
+                      if (snapshot.data == null || snapshot.data.length == 0) {
+                        return Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/icons/no_results.png',
+                                height: 100,
+                                width: 100,
+                              ),
+                              Text(
+                                'لا شيء هنا',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontFamily: 'Cairo',
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      } else if (snapshot.hasData && snapshot.data.length > 0) {
+                        return generateFavoriteProductsList(snapshot.data);
+                      }
+                      return Expanded(
+                        child: ColorsLoader(),
+                      );
+                    },
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: FlatButton(
+                    color: Colors.blue,
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Image.asset(
-                          'assets/icons/no_results.png',
-                          height: 100,
-                          width: 100,
-                        ),
                         Text(
-                          'لا شيء هنا',
+                          "إتمام عملية الدفع",
                           style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: 'Cairo',
-                            fontWeight: FontWeight.w700,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
                       ],
                     ),
-                  );
-                } else if (snapshot.hasData && snapshot.data.length > 0) {
-                  return generateFavoriteProductsList(snapshot.data);
-                }
-                return Expanded(
-                  child: ColorsLoader(),
-                );
-              },
+                    onPressed: () {
+                      dbHelper.removeAllOrders();
+                      Navigator.pop(context);
+                      paymentSuccess();
+                      changeStatusBarColor(appPrimaryColor, false);
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
         ),

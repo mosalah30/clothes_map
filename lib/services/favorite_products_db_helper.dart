@@ -75,7 +75,7 @@ class FavoriteProductsDbHelper {
     );
   }
 
-  Future close() async {
+  Future<void> close() async {
     var dbClient = await db;
     dbClient.close();
     _db = null;

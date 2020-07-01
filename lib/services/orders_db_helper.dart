@@ -75,7 +75,12 @@ class OrdersDbHelper {
     );
   }
 
-  Future close() async {
+  Future<void> removeAllOrders() async {
+    var dbClient = await db;
+    await dbClient.rawQuery("DELETE FROM `orders`");
+  }
+
+  Future<void> close() async {
     var dbClient = await db;
     dbClient.close();
     _db = null;
