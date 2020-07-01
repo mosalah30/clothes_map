@@ -77,7 +77,7 @@ class _ProductsBrowserState extends State<ProductsBrowser> {
                     child: ListView.builder(
                       itemCount: data.length,
                       controller: scrollController,
-                      itemBuilder: (context, i) => RegularProductCard(
+                      itemBuilder: (context, i) => ProductCard(
                         id: data[i].id,
                         price: data[i].price,
                         description: data[i].description,

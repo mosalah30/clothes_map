@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
+import 'package:clothes_map/screens/product_details.dart';
+import 'package:clothes_map/models/order.dart';
+import 'package:clothes_map/services/orders_db_helper.dart';
 import 'package:clothes_map/utils/screen_util.dart';
 import 'package:clothes_map/utils/custom_cached_image.dart';
+import 'package:clothes_map/utils/transitions.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class FavoriteProductCard extends StatelessWidget {
   final int id;
@@ -10,6 +15,8 @@ class FavoriteProductCard extends StatelessWidget {
   final double price;
   final String imageUrl;
   final Function onUnFavorite;
+
+  final ordersDbHelper = OrdersDbHelper();
 
   FavoriteProductCard({
     this.id,
@@ -59,7 +66,27 @@ class FavoriteProductCard extends StatelessWidget {
                   width: 25,
                 ),
                 tooltip: 'إضافة لسلة المشتريات',
-                onPressed: () {},
+                onPressed: () async {
+                  Order newOrder = Order(
+                    quantity: 1,
+                    imageUrl: imageUrl,
+                    description: description,
+                    id: id,
+                    price: price,
+                  );
+                  bool existsInCart =
+                      await ordersDbHelper.orderExistsInCart(id);
+                  if (!existsInCart) {
+                    ordersDbHelper.addOrder(newOrder);
+                    Fluttertoast.showToast(
+                      msg: "تم إضافة طلبك إلى عربة التسوق",
+                    );
+                  } else {
+                    Fluttertoast.showToast(
+                      msg: "هذا المنتج موجود بالفعل في عربة التسوق",
+                    );
+                  }
+                },
               ),
               IconButton(
                 icon: Image.asset(
@@ -68,7 +95,20 @@ class FavoriteProductCard extends StatelessWidget {
                   width: 25,
                 ),
                 tooltip: 'عرض المنتج',
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    FadeRoute(
+                      newScreen: ProductDetails(
+                        false,
+                        productsRefreshRequired: false,
+                        productId: this.id,
+                        productPrice: this.price,
+                        productDescription: this.description,
+                        imageUrl: this.imageUrl,
+                      ),
+                    ),
+                  );
+                },
               ),
               IconButton(
                 icon: Image.asset(

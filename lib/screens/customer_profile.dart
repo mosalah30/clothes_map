@@ -34,13 +34,13 @@ class _CustomerProfileState extends State<CustomerProfile> {
   String requestedNewPhoneNum = UserInfo.info['phoneNumber'];
   String requestedNewPassword = UserInfo.info['password'];
 
-  void showAlertDialog(
+  Future<void> showAlertDialog(
     DialogType type,
     String title,
     String description,
     Function onOk,
-  ) {
-    AwesomeDialog(
+  ) async {
+    await AwesomeDialog(
       context: context,
       dialogType: type,
       animType: AnimType.TOPSLIDE,
@@ -49,6 +49,7 @@ class _CustomerProfileState extends State<CustomerProfile> {
       dismissOnTouchOutside: false,
       headerAnimationLoop: false,
       btnOkOnPress: onOk,
+      btnOkText: "حسناَ",
     ).show();
   }
 
@@ -59,7 +60,6 @@ class _CustomerProfileState extends State<CustomerProfile> {
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
-          resizeToAvoidBottomPadding: false,
           body: Padding(
             padding: EdgeInsets.all(10),
             child: SingleChildScrollView(
@@ -210,9 +210,10 @@ class _CustomerProfileState extends State<CustomerProfile> {
                                   );
                                   break;
                                 case UpdateResponse.succeeded:
-                                  Provider.of<UserInfo>(context, listen: false)
-                                      .getInfo();
-                                  firstFieldFocus.dispose();
+                                  Provider.of<UserInfo>(
+                                    context,
+                                    listen: false,
+                                  ).getInfo();
                                   showAlertDialog(
                                     DialogType.SUCCES,
                                     '!تم',
@@ -231,11 +232,5 @@ class _CustomerProfileState extends State<CustomerProfile> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    firstFieldFocus.dispose();
-    super.dispose();
   }
 }

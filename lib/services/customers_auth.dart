@@ -196,6 +196,7 @@ class CustomerAuth {
         return SLogin.succeeded;
       }
     } catch (e) {
+      print(e);
       return SLogin.failed;
     }
   }
@@ -238,6 +239,7 @@ class CustomerAuth {
         return SLogin.failed;
       }
     } catch (e) {
+      print(e);
       return SLogin.failed;
     }
   }

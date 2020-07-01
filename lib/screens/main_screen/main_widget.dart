@@ -27,6 +27,7 @@ class _MainWidgetState extends State<MainWidget> {
     final deviceHeight = MediaQuery.of(context).size.height;
     if (screenIndex == 0) {
       return AppBar(
+        leading: Container(),
         centerTitle: true,
         title: Hero(
           child: Image.asset(
@@ -39,66 +40,72 @@ class _MainWidgetState extends State<MainWidget> {
     } else if (screenIndex == 2) {
       return PreferredSize(
         preferredSize: Size(double.maxFinite, deviceHeight * 0.1),
-        child: DefaultTabController(
-          length: 3,
-          initialIndex: 0,
-          child: TabBar(
-            labelPadding: EdgeInsets.symmetric(vertical: 20),
-            tabs: <Widget>[
-              Text('الرجال'),
-              Text('النساء'),
-              Text('الأطفال'),
-            ],
-            onTap: (int i) {
-              Provider.of<ScreensController>(
-                context,
-                listen: false,
-              ).changeSectionIndex(i);
-            },
+        child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: DefaultTabController(
+            length: 3,
+            initialIndex: 0,
+            child: TabBar(
+              labelPadding: EdgeInsets.symmetric(vertical: 20),
+              tabs: <Widget>[
+                Text('الرجال'),
+                Text('النساء'),
+                Text('الأطفال'),
+              ],
+              onTap: (int i) {
+                Provider.of<ScreensController>(
+                  context,
+                  listen: false,
+                ).changeSectionIndex(i);
+              },
+            ),
           ),
         ),
       );
     } else if (screenIndex == 4 && UserInfo.info['type'] == 'customer') {
       return PreferredSize(
-        child: Container(
-          color: Theme.of(context).primaryColor,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'أهلا ${UserInfo.info['name']}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
+        child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: Container(
+            color: Theme.of(context).primaryColor,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'أهلا ${UserInfo.info['name']}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 3),
-                  Text(UserInfo.info['email']),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 2, bottom: 2),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: UserInfo.info['avatarExtension'] != ''
-                      ? CachedNetworkImage(
-                          imageUrl:
-                              '$customersAvatarsStorage/${UserInfo.info['email']}.${UserInfo.info['avatarExtension']}',
-                          progressIndicatorBuilder:
-                              (context, url, downloadProgress) =>
-                                  CircularProgressIndicator(
-                            value: downloadProgress.progress,
-                          ),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error, color: Colors.red),
-                        )
-                      : Image.asset(defaultUserAvatarAsset),
+                    SizedBox(height: 3),
+                    Text(UserInfo.info['email']),
+                  ],
                 ),
-              ),
-            ],
+                Padding(
+                  padding: EdgeInsets.only(top: 2, bottom: 2),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: UserInfo.info['avatarExtension'] != ''
+                        ? CachedNetworkImage(
+                            imageUrl:
+                                '$customersAvatarsStorage/${UserInfo.info['email']}.${UserInfo.info['avatarExtension']}',
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) =>
+                                    CircularProgressIndicator(
+                              value: downloadProgress.progress,
+                            ),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error, color: Colors.red),
+                          )
+                        : Image.asset(defaultUserAvatarAsset),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         preferredSize: Size(double.maxFinite, deviceHeight * 0.1),
@@ -138,15 +145,18 @@ class _MainWidgetState extends State<MainWidget> {
       selector: (context, screensController) => screensController.screenIndex,
       builder: (context, screenIndexState, child) {
         return SafeArea(
-          child: Directionality(
-            textDirection: TextDirection.rtl,
-            child: Consumer<UserInfo>(
-              builder: (context, userInfo, child) => Scaffold(
-                backgroundColor: Colors.white,
-                resizeToAvoidBottomPadding: false,
-                appBar: buildAppBar(screenIndexState),
-                body: buildCurrentScreen(screenIndexState),
-                bottomNavigationBar: BottomNavigationBar(
+          child: Consumer<UserInfo>(
+            builder: (context, userInfo, child) => Scaffold(
+              backgroundColor: Colors.white,
+              resizeToAvoidBottomPadding: false,
+              appBar: buildAppBar(screenIndexState),
+              body: Directionality(
+                textDirection: TextDirection.rtl,
+                child: buildCurrentScreen(screenIndexState),
+              ),
+              bottomNavigationBar: Directionality(
+                textDirection: TextDirection.rtl,
+                child: BottomNavigationBar(
                   type: BottomNavigationBarType.fixed,
                   items: [
                     BottomNavigationBarItem(

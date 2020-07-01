@@ -1,3 +1,4 @@
+import 'package:clothes_map/screens/shopping_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -10,6 +11,7 @@ import 'package:clothes_map/state_management/offers_notifier.dart';
 import 'package:clothes_map/services/offers_client.dart';
 import 'package:clothes_map/utils/status_bar_color.dart';
 import 'package:clothes_map/utils/styles.dart';
+import 'package:clothes_map/utils/transitions.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -107,7 +109,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     Icons.shopping_cart,
                     color: Colors.white,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    changeStatusBarColor(Colors.black, true);
+                    Navigator.of(context).push(
+                      FadeRoute(newScreen: ShoppingCart()),
+                    );
+                  },
                 ),
               ],
             ),

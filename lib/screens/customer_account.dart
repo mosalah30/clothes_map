@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,11 +15,6 @@ class CustomerAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        OptionCard(
-          leadingIconAsset: 'orders.png',
-          title: 'الطلبات',
-          onTap: () {},
-        ),
         OptionCard(
           title: 'تفضيلاتي',
           leadingIconAsset: 'favorite.png',
@@ -65,6 +61,15 @@ class CustomerAccount extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(height: 10),
+        Text(
+          "للتواصل مع المطور",
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: "Cairo",
+          ),
+          textAlign: TextAlign.center,
+        ),
         Container(
           padding: EdgeInsets.only(top: 7),
           child: Row(
@@ -77,23 +82,23 @@ class CustomerAccount extends StatelessWidget {
                   height: 40,
                 ),
                 onTap: () async {
-                  String facebookPageUrl = '‏‎fb.me/lbsapp7‎';
-                  String facePageWebUrl = 'https://www.facebook.com/lbsapp7';
+                  String facebookPageUrl = '‏‎fb.me/moonlight2172000';
+                  String facePageWebUrl =
+                      'https://www.facebook.com/moonlight2172000';
                   await canLaunch(facebookPageUrl)
                       ? launch(facebookPageUrl)
                       : launch(facePageWebUrl);
                 },
               ),
-              SizedBox(width: 10),
+              SizedBox(width: 20),
               InkWell(
                 child: Image.asset(
-                  'assets/icons/instagram.png',
+                  'assets/icons/linkedin.png',
                   width: 40,
                   height: 40,
                 ),
-                onTap: () {
-                  launch('https://www.instagram.com');
-                },
+                onTap: () => launch(
+                    'https://www.linkedin.com/in/ammar-yasser-018673187/'),
               ),
             ],
           ),

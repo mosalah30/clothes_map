@@ -1,12 +1,11 @@
-1- shopping cart
-2- add payment
+1- add payment
 
 v1.0.0alpha
 
-3- upgrade all dependencies and perform full test
+2- upgrade all dependencies and perform full test
 
 v1.0.0beta
 
-4- add good readme with pictures and features details
+3- add good readme with pictures and features details
 
 v1.0.0stable
