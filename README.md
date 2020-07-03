@@ -13,6 +13,7 @@ _Demo app for online clothes shopping that I developed to demonstrate my skills.
 ### features
 * __Full backend system using pure PHP and MySql database.__
 * __Retrieve products and offers data from the server and display it on screen.__
+* __Shopping map that displays all dealers shops.__
 * __Simple search engine.__
 * __Sections screen with good-looking logos.__
 * __Simulates clothes shopping process.__
