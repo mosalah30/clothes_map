@@ -16,12 +16,12 @@ class ShoppingCart extends StatefulWidget {
 class _ShoppingCartState extends State<ShoppingCart> {
   OrdersDbHelper dbHelper;
   Future<List<Order>> _orders;
+  Future<bool> canProcessPayment;
 
-  @override
-  void initState() {
-    dbHelper = OrdersDbHelper();
-    refreshOrdersList();
-    super.initState();
+  Future<void> getOrdersLength() async {
+    setState(() async {
+      canProcessPayment = dbHelper.ordersNotEmpty();
+    });
   }
 
   void refreshOrdersList() {
@@ -66,6 +66,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
   @override
+  void initState() {
+    dbHelper = OrdersDbHelper();
+    refreshOrdersList();
+    getOrdersLength();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: WillPopScope(
@@ -93,6 +101,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 Expanded(
                   flex: 9,
                   child: FutureBuilder(
+                    initialData: [],
                     future: _orders,
                     builder: (context, snapshot) {
                       if (snapshot.data == null || snapshot.data.length == 0) {
@@ -127,27 +136,34 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ),
                 Expanded(
                   flex: 1,
-                  child: FlatButton(
-                    color: Colors.blue,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "إتمام عملية الدفع",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                  child: FutureBuilder(
+                    initialData: true,
+                    future: canProcessPayment,
+                    builder: (context, ordersNotEmpty) => IgnorePointer(
+                      ignoring: ordersNotEmpty.data,
+                      child: FlatButton(
+                        color: ordersNotEmpty.data ? Colors.blue : Colors.grey,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "إتمام عملية الدفع",
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                        onPressed: () {
+                          dbHelper.removeAllOrders();
+                          Navigator.pop(context);
+                          paymentSuccess();
+                          changeStatusBarColor(appPrimaryColor, false);
+                        },
+                      ),
                     ),
-                    onPressed: () {
-                      dbHelper.removeAllOrders();
-                      Navigator.pop(context);
-                      paymentSuccess();
-                      changeStatusBarColor(appPrimaryColor, false);
-                    },
                   ),
                 ),
               ],

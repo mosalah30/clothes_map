@@ -5,12 +5,12 @@ import 'package:clothes_map/components/favorite_product_card.dart';
 import 'package:clothes_map/models/favorite_product.dart';
 import 'package:clothes_map/services/favorite_products_db_helper.dart';
 
-class FavoriteProductsScreen extends StatefulWidget {
+class WishList extends StatefulWidget {
   @override
-  _FavoriteProductsScreenState createState() => _FavoriteProductsScreenState();
+  _WishListState createState() => _WishListState();
 }
 
-class _FavoriteProductsScreenState extends State<FavoriteProductsScreen> {
+class _WishListState extends State<WishList> {
   FavoriteProductsDbHelper dbHelper;
   Future<List<FavoriteProduct>> favoriteProducts;
 
@@ -52,18 +52,14 @@ class _FavoriteProductsScreenState extends State<FavoriteProductsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size(
-            double.maxFinite,
-            MediaQuery.of(context).size.height * 0.075,
-          ),
-          child: Container(
-            color: Theme.of(context).primaryColor,
-            child: Center(
-              child: Image.asset(
-                'assets/splash_logo.png',
-                fit: BoxFit.cover,
-              ),
+        appBar: AppBar(
+          leading: Container(),
+          centerTitle: true,
+          title: Text(
+            "قائمة الرغبات",
+            style: TextStyle(
+              fontSize: 25,
+              fontFamily: "Cairo",
             ),
           ),
         ),

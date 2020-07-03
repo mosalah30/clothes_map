@@ -100,148 +100,145 @@ class _ProductDetailsState extends State<ProductDetails> {
           textDirection: TextDirection.rtl,
           child: Scaffold(
             backgroundColor: Colors.white,
-            body: Padding(
-              padding: EdgeInsets.all(5),
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    flex: 9,
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          height: 40,
-                          alignment: Alignment.centerRight,
-                          child: IconButton(
-                            iconSize: 40,
-                            icon: favorite
-                                ? Icon(Icons.favorite)
-                                : Icon(Icons.favorite_border),
-                            color: favorite ? Colors.red : Colors.black,
-                            onPressed: () async {
-                              if (favorite) {
-                                await favoriteProductsDbHelper.delete(
-                                  widget.productId,
-                                  widget.productDescription,
-                                );
-                              } else {
-                                FavoriteProduct newFavoriteProduct =
-                                    FavoriteProduct(
-                                  id: widget.productId,
-                                  description: widget.productDescription,
-                                  price: widget.productPrice,
-                                  imageUrl: widget.imageUrl,
-                                );
-                                await favoriteProductsDbHelper
-                                    .add(newFavoriteProduct);
-                              }
-                              setState(() {
-                                favorite = !favorite;
-                              });
-                            },
-                          ),
+            body: Column(
+              children: <Widget>[
+                Expanded(
+                  flex: 9,
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        height: 40,
+                        alignment: Alignment.centerRight,
+                        child: IconButton(
+                          iconSize: 40,
+                          icon: favorite
+                              ? Icon(Icons.favorite)
+                              : Icon(Icons.favorite_border),
+                          color: favorite ? Colors.red : Colors.black,
+                          onPressed: () async {
+                            if (favorite) {
+                              await favoriteProductsDbHelper.delete(
+                                widget.productId,
+                                widget.productDescription,
+                              );
+                            } else {
+                              FavoriteProduct newFavoriteProduct =
+                                  FavoriteProduct(
+                                id: widget.productId,
+                                description: widget.productDescription,
+                                price: widget.productPrice,
+                                imageUrl: widget.imageUrl,
+                              );
+                              await favoriteProductsDbHelper
+                                  .add(newFavoriteProduct);
+                            }
+                            setState(() {
+                              favorite = !favorite;
+                            });
+                          },
                         ),
-                        getCacheImage(widget.imageUrl, 300),
-                        SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            Text(
-                              "${widget.productDescription}",
-                              style: TextStyle(fontSize: screenUtil.setSp(25)),
-                            ),
-                            Text(
-                              "${widget.productPrice} جنيه",
-                              style: TextStyle(
-                                fontSize: screenUtil.setSp(20),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 40),
-                        Text(
-                          "لوريم إيبسوم هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر.",
-                          style: TextStyle(
-                            fontSize: 20,
-                            height: 1.5,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(height: 25),
-                        Text(
-                          "أدخل الكمية",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontFamily: "Cairo",
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text("1"),
-                            Flexible(
-                              child: Slider(
-                                min: 1,
-                                max: 10,
-                                divisions: 10,
-                                value: quantity.toDouble(),
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    quantity = newValue.toInt();
-                                  });
-                                },
-                              ),
-                            ),
-                            Text("10"),
-                          ],
-                        ),
-                        Text(
-                          "$quantity",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: IgnorePointer(
-                      ignoring: existsInCart,
-                      child: FlatButton(
-                        color: existsInCart ? Colors.grey : Colors.blue,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              existsInCart
-                                  ? "تم إضافته بالفعل"
-                                  : "إضافة لسلة المشتريات",
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                        onPressed: () {
-                          Order newOrder = Order(
-                            id: widget.productId,
-                            description: widget.productDescription,
-                            price: widget.productPrice,
-                            imageUrl: widget.imageUrl,
-                            quantity: quantity,
-                          );
-                          ordersDbHelper.addOrder(newOrder);
-                          changeStatusBarColor(appPrimaryColor, false);
-                          Navigator.pop(context);
-                          addedToCartAlert();
-                        },
                       ),
+                      getCacheImage(widget.imageUrl, 300),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Text(
+                            "${widget.productDescription}",
+                            style: TextStyle(fontSize: screenUtil.setSp(25)),
+                          ),
+                          Text(
+                            "${widget.productPrice} جنيه",
+                            style: TextStyle(
+                              fontSize: screenUtil.setSp(20),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 40),
+                      Text(
+                        "لوريم إيبسوم هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر.",
+                        style: TextStyle(
+                          fontSize: 20,
+                          height: 1.5,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 25),
+                      Text(
+                        "أدخل الكمية",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: "Cairo",
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("1"),
+                          Flexible(
+                            child: Slider(
+                              min: 1,
+                              max: 10,
+                              divisions: 10,
+                              value: quantity.toDouble(),
+                              onChanged: (newValue) {
+                                setState(() {
+                                  quantity = newValue.toInt();
+                                });
+                              },
+                            ),
+                          ),
+                          Text("10"),
+                        ],
+                      ),
+                      Text(
+                        "$quantity",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: IgnorePointer(
+                    ignoring: existsInCart,
+                    child: FlatButton(
+                      color: existsInCart ? Colors.grey : Colors.blue,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            existsInCart
+                                ? "تم إضافته بالفعل"
+                                : "إضافة لسلة المشتريات",
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      onPressed: () {
+                        Order newOrder = Order(
+                          id: widget.productId,
+                          description: widget.productDescription,
+                          price: widget.productPrice,
+                          imageUrl: widget.imageUrl,
+                          quantity: quantity,
+                        );
+                        ordersDbHelper.addOrder(newOrder);
+                        changeStatusBarColor(appPrimaryColor, false);
+                        Navigator.pop(context);
+                        addedToCartAlert();
+                      },
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

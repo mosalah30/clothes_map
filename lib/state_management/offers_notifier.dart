@@ -35,5 +35,6 @@ class OffersNotifier extends ChangeNotifier {
     hasMore = true;
     hotOffers = List<Offer>();
     offers = List<Offer>();
+    notifyListeners();
   }
 }

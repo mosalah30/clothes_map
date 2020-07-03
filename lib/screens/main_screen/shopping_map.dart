@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:clothes_map/state_management/shops_markers_notifier.dart';
@@ -38,36 +37,22 @@ class _ShoppingMapScreenState extends State<ShoppingMapScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<ShopsMarkersNotifier>(
-      builder: (context, admin, child) => Column(
-        children: <Widget>[
-          Expanded(
-            flex: 9,
-            child: GoogleMap(
-              onCameraMoveStarted: () async {
-                admin.getMarkersOfCurrentArea(
-                  await _controller.getVisibleRegion(),
-                );
-              },
-              minMaxZoomPreference: MinMaxZoomPreference(7, 17),
-              myLocationEnabled: true,
-              myLocationButtonEnabled: true,
-              onMapCreated: _onMapCreated,
-              initialCameraPosition: CameraPosition(
-                target: LatLng(Location.userLatitude, Location.userLongitude),
-                zoom: 17,
-              ),
-              cameraTargetBounds: CameraTargetBounds(egyptBounds),
-              markers: admin.markers,
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: AdmobBanner(
-              adSize: AdmobBannerSize.BANNER,
-              adUnitId: "ca-app-pub-2775719056787328/4147895000",
-            ),
-          ),
-        ],
+      builder: (context, admin, child) => GoogleMap(
+        onCameraMoveStarted: () async {
+          admin.getMarkersOfCurrentArea(
+            await _controller.getVisibleRegion(),
+          );
+        },
+        minMaxZoomPreference: MinMaxZoomPreference(7, 17),
+        myLocationEnabled: true,
+        myLocationButtonEnabled: true,
+        onMapCreated: _onMapCreated,
+        initialCameraPosition: CameraPosition(
+          target: LatLng(Location.userLatitude, Location.userLongitude),
+          zoom: 17,
+        ),
+        cameraTargetBounds: CameraTargetBounds(egyptBounds),
+        markers: admin.markers,
       ),
     );
   }

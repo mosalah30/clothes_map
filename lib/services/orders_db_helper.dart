@@ -57,6 +57,15 @@ class OrdersDbHelper {
     return order;
   }
 
+  Future<bool> ordersNotEmpty() async {
+    var dbClient = await db;
+    var queryResult = await dbClient.rawQuery(
+      "SELECT * FROM `orders`",
+    );
+    bool notEmpty = queryResult.isNotEmpty;
+    return notEmpty;
+  }
+
   Future<bool> orderExistsInCart(int id) async {
     var dbClient = await db;
     var queryResult = await dbClient.rawQuery(

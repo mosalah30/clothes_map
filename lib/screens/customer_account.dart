@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'package:clothes_map/screens/favorite_products.dart';
+import 'package:clothes_map/screens/wish_list.dart';
 import 'package:clothes_map/screens/customer_profile.dart';
 import 'package:clothes_map/components/option_card.dart';
 import 'package:clothes_map/state_management/user_info.dart';
@@ -20,7 +20,7 @@ class CustomerAccount extends StatelessWidget {
           leadingIconAsset: 'favorite.png',
           onTap: () {
             Navigator.of(context).push(
-              SlideRightTransition(newScreen: FavoriteProductsScreen()),
+              SlideRightTransition(newScreen: WishList()),
             );
           },
         ),

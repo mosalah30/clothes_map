@@ -63,6 +63,8 @@ class _MainWidgetState extends State<MainWidget> {
         ),
       );
     } else if (screenIndex == 4 && UserInfo.info['type'] == 'customer') {
+      final avatarUrl =
+          "$customersAvatarsStorage${UserInfo.info['email']}.${UserInfo.info['avatarExtension']}";
       return PreferredSize(
         child: Directionality(
           textDirection: TextDirection.rtl,
@@ -91,8 +93,7 @@ class _MainWidgetState extends State<MainWidget> {
                     borderRadius: BorderRadius.circular(50),
                     child: UserInfo.info['avatarExtension'] != ''
                         ? CachedNetworkImage(
-                            imageUrl:
-                                '$customersAvatarsStorage/${UserInfo.info['email']}.${UserInfo.info['avatarExtension']}',
+                            imageUrl: avatarUrl,
                             progressIndicatorBuilder:
                                 (context, url, downloadProgress) =>
                                     CircularProgressIndicator(

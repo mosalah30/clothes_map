@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 27, 2020 at 10:11 AM
+-- Generation Time: Jul 03, 2020 at 12:56 PM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.12
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `id12916651_products`
 --
+CREATE DATABASE IF NOT EXISTS `id12916651_products` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `id12916651_products`;
 
 -- --------------------------------------------------------
 
