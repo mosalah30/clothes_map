@@ -1,7 +1,7 @@
 name: clothes_map
 description: demo app for online clothes shopping that I developed to demonstrate my skills.
 publish_to: 'none'
-version: 1.0.0+stable
+version: 1.0.1+stable
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
