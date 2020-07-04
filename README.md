@@ -1,6 +1,6 @@
 Clothes Map
 -----------
-_Demo app for online clothes shopping that I developed to demonstrate my skills._
+_Open source demo app for online clothes shopping that I developed to demonstrate my skills._
 
 ## showcase:
 | . | . |
