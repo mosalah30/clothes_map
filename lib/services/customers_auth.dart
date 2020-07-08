@@ -40,12 +40,11 @@ class CustomerAuth {
   }
 
   Future<bool> checkIfEmailAlreadyExists(String email) async {
-    http.Response emailAlreadyExistsResponse = await http.post(
+    http.Response response = await http.post(
       accountsDuplicateValidatorAPI,
       body: {'email': email},
     );
-    bool alreadyExists =
-        emailAlreadyExistsResponse.body == 'true' ? true : false;
+    bool alreadyExists = response.body == 'true' ? true : false;
     return alreadyExists;
   }
 
@@ -113,10 +112,10 @@ class CustomerAuth {
     String email,
     String password,
   ) async {
-    if (email.isEmpty || password.isEmpty) {
-      return EPLogin.failed;
-    }
     try {
+      if (email.isEmpty || password.isEmpty) {
+        return EPLogin.failed;
+      }
       http.Response response = await http.post(customersLoginAPI, body: {
         'email': email,
         'password': password,
@@ -211,7 +210,7 @@ class CustomerAuth {
           'https://graph.facebook.com/v2.12/me?fields=name,email&access_token=$token',
         );
         var profile = json.decode(graphResponse.body);
-        String email = profile['email'];
+        String email = profile['id'];
         String password = '%facebook%heda7';
         String name = profile['name'];
         String avatarUrl =

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 
@@ -104,101 +105,106 @@ class _ProductDetailsState extends State<ProductDetails> {
               children: <Widget>[
                 Expanded(
                   flex: 9,
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        height: 40,
-                        alignment: Alignment.centerRight,
-                        child: IconButton(
-                          iconSize: 40,
-                          icon: favorite
-                              ? Icon(Icons.favorite)
-                              : Icon(Icons.favorite_border),
-                          color: favorite ? Colors.red : Colors.black,
-                          onPressed: () async {
-                            if (favorite) {
-                              await favoriteProductsDbHelper.delete(
-                                widget.productId,
-                                widget.productDescription,
-                              );
-                            } else {
-                              FavoriteProduct newFavoriteProduct =
-                                  FavoriteProduct(
-                                id: widget.productId,
-                                description: widget.productDescription,
-                                price: widget.productPrice,
-                                imageUrl: widget.imageUrl,
-                              );
-                              await favoriteProductsDbHelper
-                                  .add(newFavoriteProduct);
-                            }
-                            setState(() {
-                              favorite = !favorite;
-                            });
-                          },
-                        ),
-                      ),
-                      getCacheImage(widget.imageUrl, 300),
-                      SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Text(
-                            "${widget.productDescription}",
-                            style: TextStyle(fontSize: screenUtil.setSp(25)),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          height: 40,
+                          alignment: Alignment.centerRight,
+                          child: IconButton(
+                            iconSize: 40,
+                            icon: favorite
+                                ? Icon(Icons.favorite)
+                                : Icon(Icons.favorite_border),
+                            color: favorite ? Colors.red : Colors.black,
+                            onPressed: () async {
+                              if (favorite) {
+                                await favoriteProductsDbHelper.delete(
+                                  widget.productId,
+                                  widget.productDescription,
+                                );
+                              } else {
+                                FavoriteProduct newFavoriteProduct =
+                                    FavoriteProduct(
+                                  id: widget.productId,
+                                  description: widget.productDescription,
+                                  price: widget.productPrice,
+                                  imageUrl: widget.imageUrl,
+                                );
+                                await favoriteProductsDbHelper
+                                    .add(newFavoriteProduct);
+                              }
+                              setState(() {
+                                favorite = !favorite;
+                              });
+                            },
                           ),
-                          Text(
-                            "${widget.productPrice} جنيه",
-                            style: TextStyle(
-                              fontSize: screenUtil.setSp(20),
+                        ),
+                        getCacheImage(widget.imageUrl, 300),
+                        SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Text(
+                              "${widget.productDescription}",
+                              style: TextStyle(fontSize: screenUtil.setSp(25)),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 40),
-                      Text(
-                        "لوريم إيبسوم هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر.",
-                        style: TextStyle(
-                          fontSize: 20,
-                          height: 1.5,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 25),
-                      Text(
-                        "أدخل الكمية",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: "Cairo",
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text("1"),
-                          Flexible(
-                            child: Slider(
-                              min: 1,
-                              max: 10,
-                              divisions: 10,
-                              value: quantity.toDouble(),
-                              onChanged: (newValue) {
-                                setState(() {
-                                  quantity = newValue.toInt();
-                                });
-                              },
+                            Text(
+                              "${widget.productPrice} جنيه",
+                              style: TextStyle(
+                                fontSize: screenUtil.setSp(20),
+                              ),
                             ),
-                          ),
-                          Text("10"),
-                        ],
-                      ),
-                      Text(
-                        "$quantity",
-                        style: TextStyle(
-                          fontSize: 20,
+                          ],
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 40),
+                        Text(
+                          "لوريم إيبسوم هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر.",
+                          style: TextStyle(
+                            fontSize: 20,
+                            height: 1.5,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 25),
+                        Text(
+                          "أدخل الكمية",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: "Cairo",
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text("1"),
+                              Flexible(
+                                child: Slider(
+                                  min: 1,
+                                  max: 10,
+                                  divisions: 10,
+                                  value: quantity.toDouble(),
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      quantity = newValue.toInt();
+                                    });
+                                  },
+                                ),
+                              ),
+                              Text("10"),
+                            ],
+                          ),
+                        ),
+                        Text(
+                          "$quantity",
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(

@@ -212,11 +212,13 @@ class _CustomerLoginState extends State<CustomerLogin> {
                                 switch (dbResponse) {
                                   case SLogin.failed:
                                     Fluttertoast.showToast(
-                                        msg: 'فشل التحقق من حسابك');
+                                      msg: 'فشل التحقق من حسابك',
+                                    );
                                     break;
                                   case SLogin.hasDifferentCredentials:
                                     Fluttertoast.showToast(
-                                        msg: 'هذا الحساب مسجل بطريقة أخرى');
+                                      msg: 'هذا الحساب مسجل بطريقة أخرى',
+                                    );
                                     break;
                                   case SLogin.succeeded:
                                     await Provider.of<UserInfo>(

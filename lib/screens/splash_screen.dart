@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     changeStatusBarColor(appPrimaryColor, false);
     UserInfo().getInfo();
     Location().findUserLocation();
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
           pageBuilder: (context, animation1, animation2) => MainWidget(),

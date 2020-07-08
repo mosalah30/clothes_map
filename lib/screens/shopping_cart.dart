@@ -16,11 +16,12 @@ class ShoppingCart extends StatefulWidget {
 class _ShoppingCartState extends State<ShoppingCart> {
   OrdersDbHelper dbHelper;
   Future<List<Order>> _orders;
-  Future<bool> canProcessPayment;
+  bool canProcessPayment = false;
 
   Future<void> getOrdersLength() async {
-    setState(() async {
-      canProcessPayment = dbHelper.ordersNotEmpty();
+    bool canProcessPayment = await dbHelper.ordersNotEmpty();
+    setState(() {
+      this.canProcessPayment = canProcessPayment;
     });
   }
 
@@ -43,6 +44,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 isInCart: true,
                 onCartRemove: () async {
                   await dbHelper.delete(product.id);
+                  await getOrdersLength();
                   refreshOrdersList();
                 },
               ),
@@ -136,33 +138,29 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ),
                 Expanded(
                   flex: 1,
-                  child: FutureBuilder(
-                    initialData: true,
-                    future: canProcessPayment,
-                    builder: (context, ordersNotEmpty) => IgnorePointer(
-                      ignoring: ordersNotEmpty.data,
-                      child: FlatButton(
-                        color: ordersNotEmpty.data ? Colors.blue : Colors.grey,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              "إتمام عملية الدفع",
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
+                  child: IgnorePointer(
+                    ignoring: canProcessPayment,
+                    child: FlatButton(
+                      color: canProcessPayment ? Colors.blue : Colors.grey,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "إتمام عملية الدفع",
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
                             ),
-                          ],
-                        ),
-                        onPressed: () {
-                          dbHelper.removeAllOrders();
-                          Navigator.pop(context);
-                          paymentSuccess();
-                          changeStatusBarColor(appPrimaryColor, false);
-                        },
+                          ),
+                        ],
                       ),
+                      onPressed: () {
+                        dbHelper.removeAllOrders();
+                        Navigator.pop(context);
+                        paymentSuccess();
+                        changeStatusBarColor(appPrimaryColor, false);
+                      },
                     ),
                   ),
                 ),
