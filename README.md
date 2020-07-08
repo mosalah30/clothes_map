@@ -10,6 +10,22 @@ _Open source demo app for online clothes shopping that I developed to demonstrat
 ![wish_list](/showcase/wish_list.png) | ![sections](/showcase/sections.png)
 ![product_details](/showcase/product_details.png) | ![shopping_cart](/showcase/shopping_cart.png)
 
+### tech stack
+* Flutter framework && Dart language
+* provider state management
+* cached network image plugin
+* regular expressions
+* Restful APIs
+* PHP + MySql backed
+* geolocator plugin
+* Sqflite local database
+* google maps plugin
+* http package
+* google signIn
+* facebook signIn
+* firebase authentication
+* shared preferences key-value storage
+
 ### features
 * __full backend system using pure PHP and MySql database.__
 * __retrieve products and offers data from the server and display it on screen.__
