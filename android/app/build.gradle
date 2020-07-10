@@ -44,7 +44,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.heda7.clothes_map"
+        applicationId "com.heda.clothes_map"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
@@ -74,7 +74,7 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.firebase:firebase-analytics:17.4.3'
-    implementation 'com.google.firebase:firebase-auth:19.3.1'
+    implementation 'com.google.firebase:firebase-auth:19.3.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

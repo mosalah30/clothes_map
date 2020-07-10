@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.heda7.clothes_map">
+    package="com.heda.clothes_map">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -29,7 +29,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCTsY8QpQGbxOgp5pXyfzxZVKEMj1RWP-U" />
+            android:value="AIzaSyBMDrc0ptYblxU3YYFsZbL7qKI3PIUiQtY" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

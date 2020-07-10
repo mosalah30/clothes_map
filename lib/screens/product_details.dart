@@ -203,6 +203,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             fontSize: 20,
                           ),
                         ),
+                        SizedBox(height: 5),
                       ],
                     ),
                   ),

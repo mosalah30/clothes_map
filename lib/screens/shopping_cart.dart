@@ -138,10 +138,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ),
                 Expanded(
                   flex: 1,
-                  child: IgnorePointer(
-                    ignoring: canProcessPayment,
-                    child: FlatButton(
-                      color: canProcessPayment ? Colors.blue : Colors.grey,
+                  child: FlatButton(
+                      color: Colors.blue,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -155,14 +153,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
                         ],
                       ),
-                      onPressed: () {
-                        dbHelper.removeAllOrders();
-                        Navigator.pop(context);
-                        paymentSuccess();
-                        changeStatusBarColor(appPrimaryColor, false);
-                      },
-                    ),
-                  ),
+                      onPressed: canProcessPayment
+                          ? () {
+                              dbHelper.removeAllOrders();
+                              Navigator.pop(context);
+                              paymentSuccess();
+                              changeStatusBarColor(appPrimaryColor, false);
+                            }
+                          : null),
                 ),
               ],
             ),

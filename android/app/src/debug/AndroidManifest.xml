@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.heda7.clothes_map">
+    package="com.heda.clothes_map">
 
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
