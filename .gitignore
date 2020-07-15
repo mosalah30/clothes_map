@@ -1,6 +1,8 @@
 *.jks
+/android/app/google-services.json
 /android/key.properties
 /backend/
+pre-requirements.txt
 
 # Miscellaneous
 *.class
