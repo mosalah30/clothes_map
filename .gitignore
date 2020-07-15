@@ -1,5 +1,6 @@
 *.jks
 /android/key.properties
+/backend/
 
 # Miscellaneous
 *.class
